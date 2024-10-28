@@ -1,7 +1,7 @@
 package mx.unam.ciencias.modelado.proyecto2.factory.fabricarutas;
 
 import mx.unam.ciencias.modelado.proyecto2.edd.GraficaDirigida;
-import mx.unam.ciencias.modelado.proyecto1.graficable.VerticeCoordenado;
+import mx.unam.ciencias.modelado.proyecto2.graficable.VerticeCoordenado;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;

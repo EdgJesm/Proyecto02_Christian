@@ -1,6 +1,7 @@
 package mx.unam.ciencias.modelado.proyecto2.factory.fabricarutas;
 
 import mx.unam.ciencias.modelado.proyecto2.graficable.VerticeCoordenado;
+import mx.unam.ciencias.modelado.proyecto2.graficable.ColorHex;
 import java.util.HashMap;
 import java.util.Map;
 /**
@@ -11,7 +12,7 @@ public class Estacion implements VerticeCoordenado{
   private double coordX;
   private double coordY;
   private ColorHex colorVertice;
-  private Strign descripcion;
+  private String descripcion;
 
   /**
    * Constructor de la clase Estacion para crear nuestras estaciones.
