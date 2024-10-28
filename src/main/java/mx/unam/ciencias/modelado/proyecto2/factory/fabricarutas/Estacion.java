@@ -2,8 +2,7 @@ package mx.unam.ciencias.modelado.proyecto2.factory.fabricarutas;
 
 import mx.unam.ciencias.modelado.proyecto2.graficable.VerticeCoordenado;
 import mx.unam.ciencias.modelado.proyecto2.graficable.ColorHex;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Objects;
 /**
  * Clase Estacion para crear un objeto de tipo Estacion //para nuestras rutas.
  */
@@ -47,19 +46,19 @@ public class Estacion implements VerticeCoordenado{
    * @return String descripcion.
    */
   @Override public String getDescripcion(){return this.descripcion;}
-  /**
-   * Método que verifica que dos objetos de tipo ... Estacion ... sean iguales.
-   * @return boolean igualdad entre 2 Objetos.
-   */
-  public boolean equals(Object obj){
-    return false;
-  }
-  /**
-   * Método que te crea un hashCode para tu estación.
-   * @return int el hashCode generado para tu estación.
-   */
-  public int hashCode(){
-    // agregar hashCode para el método
-    return 0;
-  }
+
+  @Override public boolean equals(Object obj) {
+        if (this == obj) return true; // Comparar referencia
+        if (!(obj instanceof Estacion)) return false; // Verificar si es del mismo tipo
+        Estacion other = (Estacion) obj; // Hacer el casting
+
+        // Comparar todos los atributos relevantes
+        return Double.compare(coordX, other.getCoordX()) == 0 &&
+               Double.compare(coordY, other.getCoordY()) == 0 &&
+               descripcion.equals(other.getDescripcion());
+    }
+
+    @Override public int hashCode() {
+        return Objects.hash(coordX, coordY, descripcion);
+    }
 }
