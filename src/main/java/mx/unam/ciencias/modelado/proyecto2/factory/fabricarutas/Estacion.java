@@ -1,11 +1,12 @@
 package mx.unam.ciencias.modelado.proyecto1.factory.fabricaclientes;
 
+import mx.unam.ciencias.modelado.proyecto2.graficable.VerticeCoordenado;
 import java.util.HashMap;
 import java.util.Map;
 /**
  * Clase Estacion para crear un objeto de tipo Estacion //para nuestras rutas.
  */
-public class Estacion{
+public class Estacion implements VerticeCoordenado{
 
   private double coordX;
   private double coordY;
@@ -29,22 +30,22 @@ public class Estacion{
    * Getter para coordenada x de nuestra Estacion.
    * @return double coordX.
    */
-  public double getCoordX(){return this.coordX;}
+  @Override public double getCoordX(){return this.coordX;}
   /**
    * Getter para coordenada y de nuestra Estacion.
    * @return double coordY.
    */
-  public double getCoordY(){return this.coordY;}
+  @Override public double getCoordY(){return this.coordY;}
   /**
    * Getter para el color del vértice de nuestra estación.
    * @return ColorHex colorVertice.
    */
-  public ColorHex getColorVertice(){return this.colorVertice;}
+  @Override public ColorHex getColorVertice(){return this.colorVertice;}
   /**
    * Getter para la descripcion en nuestra estación.
    * @return String descripcion.
    */
-  public String getDescripcion(){return this.descripcion;}
+  @Override public String getDescripcion(){return this.descripcion;}
   /**
    * Método que verifica que dos objetos de tipo ... Estacion ... sean iguales.
    * @return boolean igualdad entre 2 Objetos.

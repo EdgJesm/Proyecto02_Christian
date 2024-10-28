@@ -1,6 +1,6 @@
-package mx.unam.ciencias.modelado.proyecto1;
+package mx.unam.ciencias.modelado.proyecto2;
 
-import mx.unam.ciencias.modelado.proyecto1.proxy.ClienteRemoto;
+//import mx.unam.ciencias.modelado.proyecto1.proxy.ClienteRemoto;
 
 /**
  * Clase main, ejecuta el programa como un cliente.

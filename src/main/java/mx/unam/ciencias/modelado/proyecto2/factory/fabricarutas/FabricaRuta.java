@@ -1,6 +1,7 @@
 package mx.unam.ciencias.modelado.proyecto1.factory.fabricarutas;
 
-//import mx.unam.ciencias.modelado.proyecto2 ...;
+import mx.unam.ciencias.modelado.proyecto2.edd.GraficaDirigida;
+import mx.unam.ciencias.modelado.proyecto1.graficable.VerticeCoordenado;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
@@ -34,7 +35,7 @@ public abstract class FabricaRuta {
      * @param Estacion final(vertice al que queremos llegar con ruta más corta).
      * @return una instancia List<VerticeGrafica<T>> con lista con la ruta más corta de vertices
      */
-    public List<VerticeGrafica<T>> dijkstra(Estacion inicio, Estacion final){
+    public List<Estacion> dijkstra(Estacion inicio, Estacion destino){
       // implementar...
       return null;
     }
