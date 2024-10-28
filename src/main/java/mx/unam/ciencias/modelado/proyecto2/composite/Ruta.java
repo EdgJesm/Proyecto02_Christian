@@ -1,6 +1,7 @@
 package mx.unam.ciencias.modelado.proyecto2.composite;
 
 import mx.unam.ciencias.modelado.proyecto2.factory.fabricarutas.Estacion;
+import mx.unam.ciencias.modelado.proyecto2.strategy.RutaOptima;
 import java.util.List;
 
 /**
@@ -15,7 +16,7 @@ public interface Ruta{
      * @param destino estacion destino.
      * @return una lista de estaciones que supone una trayectoria.
      */
-    public List<Estacion> buscaRuta(Estacion origen, Estacion destino);
+    public List<Estacion> buscaRuta(Estacion origen, Estacion destino, RutaOptima rutaOptima);
 
     /**
      * Método que verifica contencion de la estacion.

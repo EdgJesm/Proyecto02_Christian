@@ -778,6 +778,26 @@ public class Grafica<T> implements Coleccion<T> {
     }
 
     /**
+     * Calcula una trayectoria de distancia mínima entre dos vértices.
+     * @param origen el vértice de origen.
+     * @param destino el vértice de destino.
+     * @return Una lista con vértices de la gráfica, tal que forman una
+     *         trayectoria de distancia mínima entre los vértices <code>a</code> y
+     *         <code>b</code>. Si los elementos se encuentran en componentes conexos
+     *         distintos, el algoritmo regresa una lista vacía.
+     */
+    public List<T> trayectoriaMinimaElementos(T origen, T destino){
+        List<VerticeGrafica<T>> listaVertices = trayectoriaMinima(origen, destino);
+        List<T> trayectoria = new ArrayList<>();
+
+        for(VerticeGrafica<T> vertice: listaVertices){
+            trayectoria.add(vertice.get());
+        }
+
+        return trayectoria;
+    }
+
+    /**
      * Calcula la ruta de peso mínimo entre el elemento de origen y el elemento
      * de destino.
      * @param origen el vértice origen.
@@ -853,6 +873,27 @@ public class Grafica<T> implements Coleccion<T> {
         }
         //Finalmente agregamos al vértice origen.
         trayectoria.add(0, s);
+
+        return trayectoria;
+    }
+
+    /**
+     * Calcula la ruta de peso mínimo entre el elemento de origen y el elemento
+     * de destino. Esta lista se genera sobre los elementos.
+     * @param origen el vértice origen.
+     * @param destino el vértice destino.
+     * @return una trayectoria de peso mínimo entre el vértice <code>origen</code> y
+     *         el vértice <code>destino</code>. Si los vértices están en componentes
+     *         conexas distintas, regresa una lista vacía.
+     * 
+     */
+    public List<T> dijkstraElementos(T origen, T destino){
+        List<VerticeGrafica<T>> listaVertices = dijkstra(origen, destino);
+        List<T> trayectoria = new ArrayList<>();
+
+        for(VerticeGrafica<T> vertice: listaVertices){
+            trayectoria.add(vertice.get());
+        }
 
         return trayectoria;
     }

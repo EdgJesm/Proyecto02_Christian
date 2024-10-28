@@ -3,6 +3,7 @@ package mx.unam.ciencias.modelado.proyecto2.composite;
 import mx.unam.ciencias.modelado.proyecto2.edd.Grafica;
 import mx.unam.ciencias.modelado.proyecto2.edd.GraficaDirigida;
 import mx.unam.ciencias.modelado.proyecto2.factory.fabricarutas.Estacion;
+import mx.unam.ciencias.modelado.proyecto2.strategy.RutaOptima;
 import java.util.List;
 
 /**
@@ -42,8 +43,11 @@ public class RutaCompuesta implements Ruta{
      * @param destino la estación destino.
      * @return una lista que supone una trayectoria.
      */
-    @Override public List<Estacion> buscaRuta(Estacion origen, Estacion destino){
-        return null;
+    @Override public List<Estacion> buscaRuta(Estacion origen, Estacion destino, RutaOptima rutaOptima){
+        GraficaDirigida<Estacion> combinada = new GraficaDirigida<>();
+        combinada = combinada.combinarGraficas(grafica.obtenerElementos());
+
+        return rutaOptima.calculaRuta(combinada, origen, destino);
     }
 
     /**
