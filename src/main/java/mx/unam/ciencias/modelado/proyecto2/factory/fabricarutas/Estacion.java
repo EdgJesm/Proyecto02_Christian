@@ -1,4 +1,4 @@
-package mx.unam.ciencias.modelado.proyecto1.factory.fabricaclientes;
+package mx.unam.ciencias.modelado.proyecto2.factory.fabricarutas;
 
 import mx.unam.ciencias.modelado.proyecto2.graficable.VerticeCoordenado;
 import java.util.HashMap;

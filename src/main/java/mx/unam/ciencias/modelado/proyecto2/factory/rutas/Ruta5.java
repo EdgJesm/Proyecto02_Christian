@@ -24,5 +24,5 @@ public class Ruta5 extends FabricaRuta {
    * @return String NOMBRE nombre de la ruta.
    */
   @Override
-  public String getNombre(String[] datos){return this.NOMBRE;}
+  public String getNombre(){return this.NOMBRE;}
 }

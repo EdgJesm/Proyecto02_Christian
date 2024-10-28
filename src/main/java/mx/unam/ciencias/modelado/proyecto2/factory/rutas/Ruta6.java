@@ -4,7 +4,7 @@ import mx.unam.ciencias.modelado.proyecto2.factory.fabricarutas.*;
 /*
 * Clase para crear nuestra Ruta 6
 */
-public class Ruta1 extends FabricaRuta {
+public class Ruta6 extends FabricaRuta {
 
   private final String NOMBRE = "Ruta 6";
   /**
@@ -24,5 +24,5 @@ public class Ruta1 extends FabricaRuta {
    * @return String NOMBRE nombre de la ruta.
    */
   @Override
-  public String getNombre(String[] datos){return this.NOMBRE;}
+  public String getNombre(){return this.NOMBRE;}
 }

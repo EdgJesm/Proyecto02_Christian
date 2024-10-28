@@ -1,4 +1,4 @@
-package mx.unam.ciencias.modelado.proyecto1.factory.fabricarutas;
+package mx.unam.ciencias.modelado.proyecto2.factory.fabricarutas;
 
 import mx.unam.ciencias.modelado.proyecto2.edd.GraficaDirigida;
 import mx.unam.ciencias.modelado.proyecto1.graficable.VerticeCoordenado;
