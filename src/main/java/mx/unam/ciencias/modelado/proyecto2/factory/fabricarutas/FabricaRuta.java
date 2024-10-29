@@ -64,6 +64,13 @@ public abstract class FabricaRuta implements Ruta{
     }
 
     /**
+     * Método que compone todo en una sola grafica dirigida.
+     */
+    public GraficaDirigida<Estacion> getGrafica(){
+        return ruta;
+    } 
+
+    /**
      * Método que verifica si existe una estación en la gráfica
      * @param Estacion elemento estacion a verificar existencia
      * @return boolean existencia de la estación

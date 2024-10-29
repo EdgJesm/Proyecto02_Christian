@@ -27,16 +27,16 @@ public class RutaCompuesta implements Ruta{
      */
     public void agrega(GraficaDirigida<Estacion> elemento){
         grafica.agrega(elemento);
-
+        /*
         //Hace las conexiones entre las gráficas.
         for(GraficaDirigida<Estacion> subGrafica : grafica.obtenerElementos()){
             for(Estacion estacion: elemento.obtenerElementos()){
-                if(subGrafica.contiene(estacion) && !grafica.sonVecinos(subGrafica, elemento)){
+                if(subGrafica.contiene(estacion)){
                     grafica.conecta(subGrafica, elemento);
                     break;
                 }
             }
-        }
+        }*/
     }
 
     /**
@@ -54,10 +54,8 @@ public class RutaCompuesta implements Ruta{
      * @return una lista que supone una trayectoria.
      */
     @Override public List<Estacion> buscaRuta(Estacion origen, Estacion destino, RutaOptima rutaOptima){
-        GraficaDirigida<Estacion> combinada = new GraficaDirigida<>();
-        combinada = combinada.combinarGraficas(grafica.obtenerElementos());
 
-        return rutaOptima.calculaRuta(combinada, origen, destino);
+        return rutaOptima.calculaRuta(getGrafica(), origen, destino);
     }
 
     /**
@@ -80,6 +78,14 @@ public class RutaCompuesta implements Ruta{
      */
     @Override public String getNombre(){
         return NOMBRE;
+    }
+
+    /**
+     * Método que compone todo en una sola grafica dirigida.
+     */
+    public GraficaDirigida<Estacion> getGrafica(){
+        GraficaDirigida<Estacion> combinada = new GraficaDirigida<>();
+        return combinada.combinarGraficas(grafica.obtenerElementos());
     }
 
 }

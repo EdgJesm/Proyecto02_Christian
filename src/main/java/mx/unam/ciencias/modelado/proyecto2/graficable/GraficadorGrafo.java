@@ -35,6 +35,9 @@ public class GraficadorGrafo<T extends VerticeCoordenado> {
     /**Ancho de las lineas a dibujar. */
     private static final int ANCHO_LINEA = 2; 
 
+    /**Constante de escala, permite que se modifique el tamaño de lo que se va a graficar */
+    private static final double ESCALA = 100;
+
     /**
      * Constructor de la clase, asigna atributos.
      * 
@@ -44,8 +47,20 @@ public class GraficadorGrafo<T extends VerticeCoordenado> {
         this.grafo = grafo;
         this.traductor = traductor;
         this.sb = new StringBuilder(); // Inicializa StringBuilder
+        escalaVertices();
         calculaDimensiones();
         sb.append(traductor.start(anchoLienzo, altoLienzo));
+    }
+
+    /**Método que escala los valores de los vértices según el factor de escala. */
+    private void escalaVertices(){
+        // Escalar las coordenadas de los vértices
+        for (T vertice : grafo.obtenerElementos()) {
+            double coordX = vertice.getCoordX();
+            double coordY = vertice.getCoordY();
+            vertice.setCoordX(coordX * ESCALA);
+            vertice.setCoordY(coordY * ESCALA);
+        }
     }
 
     /**

@@ -1,6 +1,7 @@
 package mx.unam.ciencias.modelado.proyecto2.factory.rutas;
 
 import mx.unam.ciencias.modelado.proyecto2.factory.fabricarutas.*;
+import mx.unam.ciencias.modelado.proyecto2.graficable.ColorHex;
 import java.util.List;
 
 /*
@@ -15,16 +16,36 @@ public class Ruta2 extends FabricaRuta {
   }
 
   /**
-   * Método para fabricar nuestra estación (Ruta2).
-   * @param datos datos para poder crear nuestra ruta 2
-   * @return Estacion NOMBRE nombre de la ruta 2.
-   */
-  @Override
-  public Estacion fabricaEstacion(String[] datos){
-    // inserte código aquí
+  * Método para fabricar nuestra estación (Ruta1).
+  * @param datos datos para poder crear nuestra ruta 1.
+  * @return Estacion nueva estación creada a partir de los datos.
+  */
+  @Override public Estacion fabricaEstacion(String[] datos) {
+        // Verificar que el arreglo de datos tenga la longitud correcta
+        if (datos.length < 4) {
+            throw new IllegalArgumentException("Datos insuficientes para crear una estación.");
+        }
 
-    // return new Estacion();
-    return null;
+        // Extraer los datos del arreglo
+        String nombre = datos[0];
+        double coordX;
+        double coordY;
+        double afluencia;
+
+        // Manejo de excepciones para las conversiones a double
+        try {
+            coordX = Double.parseDouble(datos[1]); // coordenada X
+            coordY = Double.parseDouble(datos[2]); // coordenada Y
+            afluencia = Double.parseDouble(datos[3]); // afluencia
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Formato de número inválido: " + e.getMessage());
+        }
+
+        // Crear una instancia de ColorHex con un color trivial, por ejemplo, rojo
+        ColorHex colorVertice = ColorHex.AMARILLO;
+
+        // Retornar una nueva instancia de Estacion
+        return new Estacion(coordX, coordY, afluencia, colorVertice, nombre);
   }
   /**
    * Getter para el nombre de nuestra Ruta.
