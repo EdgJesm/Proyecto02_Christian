@@ -2,6 +2,8 @@ package mx.unam.ciencias.modelado.proyecto2.factory.fabricarutas;
 
 import mx.unam.ciencias.modelado.proyecto2.edd.GraficaDirigida;
 import mx.unam.ciencias.modelado.proyecto2.graficable.VerticeCoordenado;
+import mx.unam.ciencias.modelado.proyecto2.strategy.RutaOptima;
+import mx.unam.ciencias.modelado.proyecto2.composite.Ruta;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
@@ -11,41 +13,63 @@ import java.util.ArrayList;
  * Fabrica del patrón factory. Se encarga principalmente de generar un diccionario
  * de objetos de tipo Ruta a partir de líneas de datos.
  */
-public abstract class FabricaRuta {
+public abstract class FabricaRuta implements Ruta{
 
     private GraficaDirigida<Estacion> ruta;
+
+    /**
+     * Constructor de la clase, asigna la ruta.
+     * @param lineas una lista de cadenas que deberá contener la información de la ruta.
+     */
+    public FabricaRuta(List<String> lineas){
+      ruta = generaGrafica(lineas);
+    }
+
     /**
      * Método que genera una graficaDirigida que contiene las GraficasDirigidas fabricadas.
      * @param lineas una lista de cadenas, se asume que está separada por ",".
      * @return una GraficaDirigida<Estacion>
      */
     public GraficaDirigida<Estacion> generaGrafica(List<String> lineas) {
-        //GraficaDirigida<Estacion> graficaDirigida = new GraficaDirigida();
-
+        GraficaDirigida<Estacion> graficaDirigida = new GraficaDirigida<>();
+        //Se lleva un registro de las estaciones para hacer las conexiones.
+        List<Estacion> estaciones = new ArrayList<>();
+        
+        // Fabricamos y agregamos las estaciones
         for (String linea : lineas) {
             String[] datos = linea.split(",");
-            // Cliente cliente = fabricaCliente(datos);
-            // clientes.agregar(cliente);
+            Estacion estacion = fabricaEstacion(datos);
+            graficaDirigida.agrega(estacion);
+            estaciones.add(estacion);
         }
-        return null;
+        
+        // Conectamos las estaciones en un ciclo
+        for (int i = 0; i < estaciones.size(); i++) {
+            Estacion actual = estaciones.get(i);
+            Estacion siguiente = estaciones.get((i + 1) % estaciones.size()); // Ciclo que conecta la última con la primera
+            graficaDirigida.conecta(actual, siguiente);
+        }
+
+        return graficaDirigida;
     }
+
     /**
-     * Método que aplica el algoritmo Dijkstra sobre una gráfica
-     * @param Estacion inicial(raiz para arborescencia con dijkstra).
-     * @param Estacion final(vertice al que queremos llegar con ruta más corta).
-     * @return una instancia List<VerticeGrafica<T>> con lista con la ruta más corta de vertices
+     * Método que se encargará de buscar un camino entre dos estaciones.
+     * @param origen estacion origen.
+     * @param destino estacion destino.
+     * @return una lista de estaciones que supone una trayectoria.
      */
-    public List<Estacion> dijkstra(Estacion inicio, Estacion destino){
-      // implementar...
-      return null;
+    @Override public List<Estacion> buscaRuta(Estacion origen, Estacion destino, RutaOptima rutaOptima){
+        return rutaOptima.calculaRuta(ruta, origen, destino);
     }
+
     /**
      * Método que verifica si existe una estación en la gráfica
      * @param Estacion elemento estacion a verificar existencia
      * @return boolean existencia de la estación
      */
     public boolean contiene(Estacion elemento){
-      return false;
+        return ruta.contiene(elemento);
     }
     /**
      * Método abstracto de tipo getter para obtener el nombre de nuestra estación.

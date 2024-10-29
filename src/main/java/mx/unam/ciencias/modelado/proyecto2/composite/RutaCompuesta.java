@@ -74,6 +74,10 @@ public class RutaCompuesta implements Ruta{
         return false;
     }
 
+    /**
+     * Getter del nombre de la ruta
+     * @return String NOMBRE.
+     */
     @Override public String getNombre(){
         return NOMBRE;
     }

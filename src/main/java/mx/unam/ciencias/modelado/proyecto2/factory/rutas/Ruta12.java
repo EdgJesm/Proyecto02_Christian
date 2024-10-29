@@ -1,12 +1,19 @@
 package mx.unam.ciencias.modelado.proyecto2.factory.rutas;
 
 import mx.unam.ciencias.modelado.proyecto2.factory.fabricarutas.*;
+import java.util.List;
+
 /*
 * Clase para crear nuestra Ruta 12
 */
 public class Ruta12 extends FabricaRuta {
 
   private final String NOMBRE = "Ruta 12";
+
+  public Ruta12(List<String> lineas){
+    super(lineas);
+  }
+
   /**
    * Método para fabricar nuestra estación (Ruta12).
    * @param datos datos para poder crear nuestra ruta 12
