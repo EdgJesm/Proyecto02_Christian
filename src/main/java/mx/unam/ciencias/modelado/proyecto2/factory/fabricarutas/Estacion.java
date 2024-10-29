@@ -10,6 +10,7 @@ public class Estacion implements VerticeCoordenado{
 
   private double coordX;
   private double coordY;
+  private double afluencia;
   private ColorHex colorVertice;
   private String descripcion;
 
@@ -17,12 +18,14 @@ public class Estacion implements VerticeCoordenado{
    * Constructor de la clase Estacion para crear nuestras estaciones.
    * @param coordX coordenada x de nuestra estacion en el plano.
    * @param coordY coordenada y de nuestra estacion en el plano.
+   * @param afluencia un valor flotante que representa el peso de la estación.
    * @param ColorHex colorVertice color para el vertice que representa nuestra estación.
    * @param String descripcion breve descripción para la estación.
    */
-  public void Estacion(double coordX, double coordY, ColorHex colorVertice, String descripcion){
+  public void Estacion(double coordX, double coordY, double afluencia,ColorHex colorVertice, String descripcion){
       this.coordX = coordX;
       this.coordY = coordY;
+      this.afluencia = afluencia;
       this.colorVertice = colorVertice;
       this.descripcion = descripcion;
   }
@@ -36,6 +39,11 @@ public class Estacion implements VerticeCoordenado{
    * @return double coordY.
    */
   @Override public double getCoordY(){return this.coordY;}
+   /**
+   * Getter para la fluencia de la estación.
+   * @return double afluencia.
+   */
+  public double getAfluencia(){return this.afluencia;}
   /**
    * Getter para el color del vértice de nuestra estación.
    * @return ColorHex colorVertice.
@@ -61,4 +69,5 @@ public class Estacion implements VerticeCoordenado{
     @Override public int hashCode() {
         return Objects.hash(coordX, coordY, descripcion);
     }
+    
 }

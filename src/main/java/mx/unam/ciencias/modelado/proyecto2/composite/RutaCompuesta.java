@@ -27,6 +27,16 @@ public class RutaCompuesta implements Ruta{
      */
     public void agrega(GraficaDirigida<Estacion> elemento){
         grafica.agrega(elemento);
+
+        //Hace las conexiones entre las gráficas.
+        for(GraficaDirigida<Estacion> subGrafica : grafica.obtenerElementos()){
+            for(Estacion estacion: elemento.obtenerElementos()){
+                if(subGrafica.contiene(estacion) && !grafica.sonVecinos(subGrafica, elemento)){
+                    grafica.conecta(subGrafica, elemento);
+                    break;
+                }
+            }
+        }
     }
 
     /**
