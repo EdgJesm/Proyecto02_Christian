@@ -6,13 +6,13 @@ import java.util.List;
 
 /**
  * Implementacion de una de las estrategias para las rutas optimas.
- * En este caso se trata de la ruta con el minimo numero de paradas entre estaciones.
+ * En este caso se trata de la ruta con la minima afluencia en estaciones.
  */
 public class MenorAfluencia implements RutaOptima{
 
     /**
      * Método principal de la interfaz, calculará una trayectoria de estaciones dado un grafo dirigido y los vértices origen y destino.
-     * El criterio de optimización será minimizar las paradas que hará el autobus.
+     * El criterio de optimización será minimizar la afluencia en las estaciones.
      * @param origen la estacion origen.
      * @param destino la estacion destino.
      * @return una lista que supone una trayectoria del origen al destino.
@@ -23,6 +23,11 @@ public class MenorAfluencia implements RutaOptima{
 
     }
 
+    /**
+     * Método que resetea los pesos del grafo a partir de la afluencia de las estaciones.
+     * @param grafo un grafo dirigido de estaciones.
+     * @return una grafica con los vertices del grafo pero cuyas aristas tienen el peso de la afluencia.
+     */
     private GraficaDirigida<Estacion> reseteaPesos(GraficaDirigida<Estacion> grafo){
         GraficaDirigida<Estacion> grafoAfluencia = grafo;
 

@@ -6,13 +6,13 @@ import java.util.List;
 
 /**
  * Implementacion de una de las estrategias para las rutas optimas.
- * En este caso se trata de la ruta con el minimo numero de paradas entre estaciones.
+ * En este caso se trata de la ruta con la menor distancia entre estaciones.
  */
 public class MenorDistancia implements RutaOptima{
 
     /**
      * Método principal de la interfaz, calculará una trayectoria de estaciones dado un grafo dirigido y los vértices origen y destino.
-     * El criterio de optimización será minimizar las paradas que hará el autobus.
+     * El criterio de optimización será minimizar la distancia entre estaciones.
      * @param origen la estacion origen.
      * @param destino la estacion destino.
      * @return una lista que supone una trayectoria del origen al destino.
@@ -23,6 +23,11 @@ public class MenorDistancia implements RutaOptima{
 
     }
 
+    /**
+     * Método que resetea los pesos del grafo en base a la distancia euclidiana entre estaciones.
+     * @param grafo un grafo dirigido de estaciones.
+     * @return una copia del grafo recibido pero cuyas aritas pesan la distancia entre estaciones.
+     */
     private GraficaDirigida<Estacion> reseteaPesos(GraficaDirigida<Estacion> grafo){
         GraficaDirigida<Estacion> grafoDistancia = grafo;
 
@@ -42,7 +47,7 @@ public class MenorDistancia implements RutaOptima{
      * @param estacionB segunda Estacion.
      * @return double distancia entre estacionA y estacionB.
      */
-    public static double distancia(Estacion estacionA, Estacion estacionB) {
+    private static double distancia(Estacion estacionA, Estacion estacionB) {
         double distanciaX = estacionA.getCoordX() - estacionB.getCoordX();
         double distanciaY = estacionA.getCoordY() - estacionB.getCoordY();
         return Math.sqrt(distanciaX * distanciaX + distanciaY * distanciaY);
