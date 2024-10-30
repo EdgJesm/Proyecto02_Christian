@@ -45,16 +45,6 @@ public class Estacion implements VerticeCoordenado {
     }
 
     /**
-     * Establece la coordenada X de la estación.
-     *
-     * @param x la nueva coordenada X de la estación.
-     */
-    @Override
-    public void setCoordX(double x) {
-        this.coordX = x;
-    }
-
-    /**
      * Obtiene la coordenada Y de la estación.
      *
      * @return double que representa la coordenada Y de la estación.
@@ -62,16 +52,6 @@ public class Estacion implements VerticeCoordenado {
     @Override
     public double getCoordY() {
         return this.coordY;
-    }
-
-    /**
-     * Establece la coordenada Y de la estación.
-     *
-     * @param y la nueva coordenada Y de la estación.
-     */
-    @Override
-    public void setCoordY(double y) {
-        this.coordY = y;
     }
 
     /**
@@ -128,7 +108,7 @@ public class Estacion implements VerticeCoordenado {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(descripcion);
+        return Objects.hash(coordX, coordY, descripcion);
     }
 
     @Override public String toString(){

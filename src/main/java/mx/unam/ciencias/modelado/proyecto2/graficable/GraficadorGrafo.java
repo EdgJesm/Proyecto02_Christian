@@ -47,20 +47,9 @@ public class GraficadorGrafo<T extends VerticeCoordenado> {
         this.grafo = grafo;
         this.traductor = traductor;
         this.sb = new StringBuilder(); // Inicializa StringBuilder
-        escalaVertices();
         calculaDimensiones();
         sb.append(traductor.start(anchoLienzo, altoLienzo));
-    }
-
-    /**Método que escala los valores de los vértices según el factor de escala. */
-    private void escalaVertices(){
-        // Escalar las coordenadas de los vértices
-        for (T vertice : grafo.obtenerElementos()) {
-            double coordX = vertice.getCoordX();
-            double coordY = vertice.getCoordY();
-            vertice.setCoordX(coordX * ESCALA);
-            vertice.setCoordY(coordY * ESCALA);
-        }
+        sb.append(traductor.coloreaLienzo(ColorHex.BLANCO));
     }
 
     /**
@@ -72,8 +61,8 @@ public class GraficadorGrafo<T extends VerticeCoordenado> {
         }
         
         for (T vertice : grafo.obtenerElementos()) {
-            double coordX = vertice.getCoordX();
-            double coordY = vertice.getCoordY();
+            double coordX = ESCALA * vertice.getCoordX();
+            double coordY = ESCALA * vertice.getCoordY();
 
             if (coordX > maxCoordX) {
                 maxCoordX = coordX;
@@ -92,8 +81,8 @@ public class GraficadorGrafo<T extends VerticeCoordenado> {
      */
     public void graficaVertices(){
         for (T vertice : grafo.obtenerElementos()) {
-            double cx = vertice.getCoordX();
-            double cy = vertice.getCoordY();
+            double cx = ESCALA * vertice.getCoordX();
+            double cy = ESCALA * vertice.getCoordY();
             
             // Dibuja el círculo
             sb.append(traductor.dibujaCirculo(cx, cy, RADIO_VERTICE, COLOR_BORDE, GRUESO_BORDE, COLOR_FIGURA));
@@ -108,10 +97,10 @@ public class GraficadorGrafo<T extends VerticeCoordenado> {
 
         for (T vertice : grafo.obtenerElementos()) {
             for (T vecino : grafo.obtenerVecinos(vertice)) {
-                double x1 = vertice.getCoordX();
-                double y1 = vertice.getCoordY();
-                double x2 = vecino.getCoordX();
-                double y2 = vecino.getCoordY();
+                double x1 = ESCALA * vertice.getCoordX();
+                double y1 = ESCALA * vertice.getCoordY();
+                double x2 = ESCALA * vecino.getCoordX();
+                double y2 = ESCALA * vecino.getCoordY();
 
                 sb.append(traductor.dibujaLinea(x1, y1, x2, y2, vertice.getColorVertice(), ANCHO_LINEA));
 
@@ -131,10 +120,10 @@ public class GraficadorGrafo<T extends VerticeCoordenado> {
         for (int i = 0; i < camino.size() - 1; i++) {
             T verticeActual = camino.get(i);
             T siguienteVertice = camino.get(i + 1);
-            double x1 = verticeActual.getCoordX();
-            double y1 = verticeActual.getCoordY();
-            double x2 = siguienteVertice.getCoordX();
-            double y2 = siguienteVertice.getCoordY();
+            double x1 = ESCALA * verticeActual.getCoordX();
+            double y1 = ESCALA * verticeActual.getCoordY();
+            double x2 = ESCALA * siguienteVertice.getCoordX();
+            double y2 = ESCALA * siguienteVertice.getCoordY();
 
             sb.append(traductor.dibujaLinea(x1, y1, x2, y2, colorCamino, ANCHO_LINEA*2));
         }

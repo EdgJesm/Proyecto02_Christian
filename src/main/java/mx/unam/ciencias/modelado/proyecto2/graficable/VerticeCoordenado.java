@@ -15,25 +15,11 @@ public interface VerticeCoordenado {
     public double getCoordX();
 
     /**
-     * Establece la coordenada X del vértice.
-     * 
-     * @param x la nueva coordenada X del vértice.
-     */
-    public void setCoordX(double x);
-
-    /**
      * Obtiene la coordenada Y del vértice.
      * 
      * @return la coordenada Y del vértice.
      */
     public double getCoordY();
-
-    /**
-     * Establece la coordenada Y del vértice.
-     * 
-     * @param y la nueva coordenada Y del vértice.
-     */
-    public void setCoordY(double y);
 
     /**
      * Obtiene el color del vértice representado como una instancia de {@link ColorHex}.

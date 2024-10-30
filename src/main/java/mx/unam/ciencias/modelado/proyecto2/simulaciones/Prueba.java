@@ -23,16 +23,16 @@ public class Prueba{
         System.err.println("Rutas cargadas");
 
         sistema.agrega(r1.getGrafica());
-        //sistema.agrega(r2.getGrafica());
-        //sistema.agrega(r3.getGrafica());
+        sistema.agrega(r2.getGrafica());
+        sistema.agrega(r3.getGrafica());
         System.err.println("Rutas agregadas.");
 
 
         Estacion origen = new Estacion(7.7, 5.9, 24.0, ColorHex.NEGRO, "BaseMetroCU");
-        Estacion destino = new Estacion(7.2, 4.5, 17.0, ColorHex.NEGRO, "InstitutoGeofisica");
+        Estacion destino = new Estacion(7.3, 6.9, 17.0, ColorHex.NEGRO, "TiendaUNAM1");
         System.err.println("Trayectoria establecida.");
         
-        RutaOptima criterio = new MenorNumeroDeParadas();
+        RutaOptima criterio = new MenorDistancia();
         System.err.println("Criterio establecido.");
 
         List<Estacion> trayectoria = sistema.buscaRuta(origen, destino, criterio);

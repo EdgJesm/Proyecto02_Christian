@@ -18,8 +18,7 @@ public class MenorDistancia implements RutaOptima{
      * @return una lista que supone una trayectoria del origen al destino.
      */
     public List<Estacion> calculaRuta(GraficaDirigida<Estacion> grafo, Estacion origen, Estacion destino){
-        GraficaDirigida<Estacion> grafoReseteado = reseteaPesos(grafo);
-        return grafoReseteado.dijkstraElementos(origen, destino);
+        return reseteaPesos(grafo).dijkstraElementos(origen, destino);
 
     }
 
@@ -29,15 +28,13 @@ public class MenorDistancia implements RutaOptima{
      * @return una copia del grafo recibido pero cuyas aritas pesan la distancia entre estaciones.
      */
     private GraficaDirigida<Estacion> reseteaPesos(GraficaDirigida<Estacion> grafo){
-        GraficaDirigida<Estacion> grafoDistancia = grafo;
-
         for(Estacion estacion : grafo.obtenerElementos()){
             for(Estacion vecino : grafo.obtenerVecinos(estacion)){
-                grafoDistancia.setPeso(estacion, vecino, distancia(estacion, vecino));
+                grafo.setPeso(estacion, vecino, distancia(estacion, vecino));
             }
         }
 
-        return grafoDistancia;
+        return grafo;
     }
 
 
