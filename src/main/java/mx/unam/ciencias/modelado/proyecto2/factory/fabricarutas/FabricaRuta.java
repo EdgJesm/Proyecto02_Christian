@@ -47,7 +47,7 @@ public abstract class FabricaRuta implements Ruta{
         for (int i = 0; i < estaciones.size(); i++) {
             Estacion actual = estaciones.get(i);
             Estacion siguiente = estaciones.get((i + 1) % estaciones.size()); // Ciclo que conecta la última con la primera
-            graficaDirigida.conecta(actual, siguiente);
+            graficaDirigida.conecta(actual, siguiente, actual.getAfluencia());
         }
 
         return graficaDirigida;

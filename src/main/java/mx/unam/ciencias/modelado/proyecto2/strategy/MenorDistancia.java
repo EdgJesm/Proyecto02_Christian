@@ -3,6 +3,7 @@ package mx.unam.ciencias.modelado.proyecto2.strategy;
 import mx.unam.ciencias.modelado.proyecto2.edd.GraficaDirigida;
 import mx.unam.ciencias.modelado.proyecto2.factory.fabricarutas.Estacion;
 import java.util.List;
+import java.util.Arrays;
 
 /**
  * Implementacion de una de las estrategias para las rutas optimas.
@@ -20,8 +21,9 @@ public class MenorDistancia implements RutaOptima {
     public List<Estacion> calculaRuta(GraficaDirigida<Estacion> grafo, Estacion origen, Estacion destino) {
         // Modificamos directamente los pesos en el grafo original
         GraficaDirigida<Estacion> grafoDistancia = reseteaPesos(grafo);
-
         return grafoDistancia.dijkstraElementos(origen, destino);
+        
+        //return grafoDistancia.dijkstraElementos(origen, destino);
     }
 
     /**
@@ -29,28 +31,21 @@ public class MenorDistancia implements RutaOptima {
      * @param grafo un grafo dirigido de estaciones.
      */
     private GraficaDirigida<Estacion> reseteaPesos(GraficaDirigida<Estacion> grafo) {
-        for (Estacion estacion : grafo.obtenerElementos()) {
-            for (Estacion vecino : grafo.obtenerVecinos(estacion)) {
-                // Actualizamos el peso solo si es necesario
-                if (grafo.getPeso(estacion, vecino) == 1) {
-                    grafo.setPeso(estacion, vecino, distancia(estacion, vecino));
-                }
+        GraficaDirigida<Estacion> grafoDistancia = new GraficaDirigida<>();
+        grafoDistancia = grafoDistancia.combinarGraficas(Arrays.asList(grafo));
+
+        for(Estacion estacion : grafoDistancia.obtenerElementos()){
+            for(Estacion vecino :  grafoDistancia.obtenerVecinos(estacion)){
+                //if(grafoDistancia.getPeso(estacion, vecino) == 1.0){
+                    grafoDistancia.setPeso(estacion, vecino, distancia(estacion, vecino));
+                //}
             }
         }
 
-        return grafo;
+        return grafoDistancia;
     }
 
-    private void reseteaPesosUnitarios(GraficaDirigida<Estacion> grafo){
-        for (Estacion estacion : grafo.obtenerElementos()) {
-            for (Estacion vecino : grafo.obtenerVecinos(estacion)) {
-                // Actualizamos el peso solo si es necesario
-                if (!grafo.sonVecinos(estacion, vecino) && grafo.getPeso(estacion, vecino) == 1) {
-                    grafo.setPeso(estacion, vecino, distancia(estacion, vecino));
-                }
-            }
-        }
-    }
+    //private void reseteaPesosUnitarios(GraficaDirigida<Estacion> grafo){}
 
     /**
      * Calcula la distancia entre dos estaciones.

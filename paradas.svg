@@ -56,6 +56,33 @@
     <line x1='430.000000' y1='240.000000' x2='480.000000' y2='240.000000' stroke='#000000' stroke-width='2' />
     <line x1='520.000000' y1='560.000000' x2='480.000000' y2='550.000000' stroke='#FFFF00' stroke-width='2' />
     <line x1='440.000000' y1='1020.000000' x2='510.000000' y2='980.000000' stroke='#00FF00' stroke-width='2' />
+    <line x1='730.000000' y1='780.000000' x2='730.000000' y2='760.000000' stroke='#FF0000' stroke-width='4' />
+    <line x1='730.000000' y1='760.000000' x2='730.000000' y2='740.000000' stroke='#FF0000' stroke-width='4' />
+    <line x1='730.000000' y1='740.000000' x2='730.000000' y2='690.000000' stroke='#FF0000' stroke-width='4' />
+    <line x1='730.000000' y1='690.000000' x2='770.000000' y2='590.000000' stroke='#FF0000' stroke-width='4' />
+    <line x1='770.000000' y1='590.000000' x2='700.000000' y2='610.000000' stroke='#FF0000' stroke-width='4' />
+    <line x1='700.000000' y1='610.000000' x2='640.000000' y2='640.000000' stroke='#FF0000' stroke-width='4' />
+    <line x1='640.000000' y1='640.000000' x2='590.000000' y2='550.000000' stroke='#FF0000' stroke-width='4' />
+    <line x1='590.000000' y1='550.000000' x2='520.000000' y2='560.000000' stroke='#FF0000' stroke-width='4' />
+    <line x1='520.000000' y1='560.000000' x2='480.000000' y2='550.000000' stroke='#FF0000' stroke-width='4' />
+    <line x1='480.000000' y1='550.000000' x2='430.000000' y2='550.000000' stroke='#FF0000' stroke-width='4' />
+    <line x1='430.000000' y1='550.000000' x2='410.000000' y2='580.000000' stroke='#FF0000' stroke-width='4' />
+    <line x1='410.000000' y1='580.000000' x2='470.000000' y2='620.000000' stroke='#FF0000' stroke-width='4' />
+    <line x1='470.000000' y1='620.000000' x2='530.000000' y2='610.000000' stroke='#FF0000' stroke-width='4' />
+    <text fill='#00FF00' font-family='sans-serif' font-size='12' font-weight='bold' x='800.000000' y='27.000000' text-anchor='middle'>TVUNAM</text>
+    <text fill='#00FF00' font-family='sans-serif' font-size='12' font-weight='bold' x='800.000000' y='44.000000' text-anchor='middle'>CUEC</text>
+    <text fill='#00FF00' font-family='sans-serif' font-size='12' font-weight='bold' x='800.000000' y='61.000000' text-anchor='middle'>DGSA</text>
+    <text fill='#00FF00' font-family='sans-serif' font-size='12' font-weight='bold' x='800.000000' y='78.000000' text-anchor='middle'>TiendaUNAM1</text>
+    <text fill='#000000' font-family='sans-serif' font-size='12' font-weight='bold' x='800.000000' y='95.000000' text-anchor='middle'>BaseMetroCU</text>
+    <text fill='#000000' font-family='sans-serif' font-size='12' font-weight='bold' x='800.000000' y='112.000000' text-anchor='middle'>QuimicaDyE</text>
+    <text fill='#FFFF00' font-family='sans-serif' font-size='12' font-weight='bold' x='800.000000' y='129.000000' text-anchor='middle'>FacultadCienciasAlumnos</text>
+    <text fill='#FFFF00' font-family='sans-serif' font-size='12' font-weight='bold' x='800.000000' y='146.000000' text-anchor='middle'>CienciasCaminoVerde</text>
+    <text fill='#FFFF00' font-family='sans-serif' font-size='12' font-weight='bold' x='800.000000' y='163.000000' text-anchor='middle'>FacultadAdministracion</text>
+    <text fill='#FFFF00' font-family='sans-serif' font-size='12' font-weight='bold' x='800.000000' y='180.000000' text-anchor='middle'>EscuelaTrabajoSocial</text>
+    <text fill='#FFFF00' font-family='sans-serif' font-size='12' font-weight='bold' x='800.000000' y='197.000000' text-anchor='middle'>BaseMetrobusCU</text>
+    <text fill='#FFFF00' font-family='sans-serif' font-size='12' font-weight='bold' x='800.000000' y='214.000000' text-anchor='middle'>MetrobusCU1</text>
+    <text fill='#FFFF00' font-family='sans-serif' font-size='12' font-weight='bold' x='800.000000' y='231.000000' text-anchor='middle'>EducacionDistancia</text>
+    <text fill='#FFFF00' font-family='sans-serif' font-size='12' font-weight='bold' x='800.000000' y='248.000000' text-anchor='middle'>DGTIC</text>
     <circle cx='700.000000' cy='610.000000' r='10' stroke='#000000' stroke-width='2' fill='#FFFFFF' />
     <text fill='#000000' font-family='sans-serif' font-size='12' font-weight='bold' x='700.000000' y='595.000000' text-anchor='middle'>QuimicaDyE</text>
     <circle cx='770.000000' cy='590.000000' r='10' stroke='#000000' stroke-width='2' fill='#FFFFFF' />

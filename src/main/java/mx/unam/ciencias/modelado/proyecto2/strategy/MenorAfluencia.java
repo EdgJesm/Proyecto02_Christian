@@ -18,7 +18,7 @@ public class MenorAfluencia implements RutaOptima{
      * @return una lista que supone una trayectoria del origen al destino.
      */
     public List<Estacion> calculaRuta(GraficaDirigida<Estacion> grafo, Estacion origen, Estacion destino){
-        return reseteaPesos(grafo).dijkstraElementos(origen, destino);
+        return grafo.dijkstraElementos(origen, destino);
 
     }
 

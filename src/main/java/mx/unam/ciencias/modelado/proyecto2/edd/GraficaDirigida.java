@@ -432,7 +432,7 @@ public class GraficaDirigida<T> implements Coleccion<T> {
      */
     public void setPeso(T a, T b, double peso) {
         // Aquí va su código.
-        if(!(sonVecinos(a, b) || sonVecinos(b, a))){//Si no son vecinos.
+        if(!(sonVecinos(a, b))){//Si no son vecinos.
             throw new IllegalArgumentException("No son vécinos: " + a + ", " + b);
         }
 
@@ -890,6 +890,7 @@ public class GraficaDirigida<T> implements Coleccion<T> {
         }*/
         m = new MonticuloArreglo<Vertice>(vertices.values(), vertices.size());
 
+        //System.err.println("Empezamos ruta.");
         //Procedemos con el algoritmo de Djikstra.
         while(!m.esVacia()){
             Vertice u = m.elimina();
@@ -909,11 +910,15 @@ public class GraficaDirigida<T> implements Coleccion<T> {
             return trayectoria;
         }
 
+
+        //System.err.println("Dimos con el destino.");
         //Procedemos con la construcción de la trayectoria.
         Vertice u = t;//Partimos del vértice destino.
         while(u != s){//Hasta que u sea el origen.
+            //System.err.println("Checando apuntadores: " + u.get());
             for(Vecino vc : u.apuntadores.values()){
                 //Si damos con un vecino que tal que d(u)-1 = d(vc.vecino)
+                //System.err.println("    : " + vc.get());
                 if(u.distancia - vc.peso == vc.vecino.distancia){
                     //Metemos a 'u' y actualizamos su valor al del vértice siguiente.
                     trayectoria.add(0, u);
@@ -922,6 +927,7 @@ public class GraficaDirigida<T> implements Coleccion<T> {
                 }
             }
         }
+        //System.err.println("Dimos con la trayectoria.");
         //Finalmente agregamos al vértice origen.
         trayectoria.add(0, s);
 
@@ -939,6 +945,7 @@ public class GraficaDirigida<T> implements Coleccion<T> {
      * 
      */
     public List<T> dijkstraElementos(T origen, T destino){
+        //System.err.println("Intentando dijkstra");
         List<VerticeGrafica<T>> listaVertices = dijkstra(origen, destino);
         List<T> trayectoria = new ArrayList<>();
 
