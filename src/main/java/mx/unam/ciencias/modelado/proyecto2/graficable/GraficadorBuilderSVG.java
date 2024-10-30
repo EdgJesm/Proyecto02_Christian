@@ -50,6 +50,8 @@ public class GraficadorBuilderSVG<T extends VerticeCoordenado> {
         if (trayectoria != null && !trayectoria.isEmpty()) {
             graficador.graficaCamino(trayectoria);
             graficador.graficaDescripciones(trayectoria);
+        } else{
+            System.err.println("No hay trayectoria");
         }
 
         //Al ultimo los vértices

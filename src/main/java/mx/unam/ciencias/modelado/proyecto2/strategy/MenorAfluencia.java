@@ -18,8 +18,7 @@ public class MenorAfluencia implements RutaOptima{
      * @return una lista que supone una trayectoria del origen al destino.
      */
     public List<Estacion> calculaRuta(GraficaDirigida<Estacion> grafo, Estacion origen, Estacion destino){
-        GraficaDirigida<Estacion> grafoReseteado = reseteaPesos(grafo);
-        return grafoReseteado.dijkstraElementos(origen, destino);
+        return reseteaPesos(grafo).dijkstraElementos(origen, destino);
 
     }
 
@@ -29,11 +28,17 @@ public class MenorAfluencia implements RutaOptima{
      * @return una grafica con los vertices del grafo pero cuyas aristas tienen el peso de la afluencia.
      */
     private GraficaDirigida<Estacion> reseteaPesos(GraficaDirigida<Estacion> grafo){
-        GraficaDirigida<Estacion> grafoAfluencia = grafo;
+        GraficaDirigida<Estacion> grafoAfluencia = new GraficaDirigida<Estacion>();
+
+        for(Estacion estacion : grafo.obtenerElementos()){
+            grafoAfluencia.agrega(estacion);
+        }
 
         for(Estacion estacion : grafo.obtenerElementos()){
             for(Estacion vecino : grafo.obtenerVecinos(estacion)){
-                grafoAfluencia.setPeso(estacion, vecino, estacion.getAfluencia());
+                if(grafo.getPeso(estacion, vecino) == 1){
+                    grafoAfluencia.conecta(estacion, vecino, estacion.getAfluencia());
+                }
             }
         }
 

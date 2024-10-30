@@ -30,6 +30,7 @@ public class Prueba{
 
         Estacion origen = new Estacion(7.7, 5.9, 24.0, ColorHex.NEGRO, "BaseMetroCU");
         Estacion destino = new Estacion(7.3, 6.9, 17.0, ColorHex.NEGRO, "TiendaUNAM1");
+        Estacion destino2 = new Estacion(7.0, 6.1, 17.0, ColorHex.NEGRO, "QuimicaDyE");
         System.err.println("Trayectoria establecida.");
         
         RutaOptima criterio = new MenorDistancia();

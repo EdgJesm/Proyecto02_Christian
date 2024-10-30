@@ -276,6 +276,7 @@ public class GraficaDirigida<T> implements Coleccion<T> {
         //Agregamos a sus listas de adyacencias.
         vA.vecinos.put(b, vcB);
         vB.apuntadores.put(a, vcA);
+
     }
 
     /**
@@ -446,7 +447,6 @@ public class GraficaDirigida<T> implements Coleccion<T> {
         //Asignamos pesos.
         vA.vecinos.get(b).peso = peso;
         vB.apuntadores.get(a).peso = peso;
-        System.err.println("Se seteo peso de: " + a + ", " + b);
     }
 
     /**

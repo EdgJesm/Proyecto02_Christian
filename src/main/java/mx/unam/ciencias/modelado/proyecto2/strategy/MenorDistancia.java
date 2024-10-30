@@ -8,7 +8,7 @@ import java.util.List;
  * Implementacion de una de las estrategias para las rutas optimas.
  * En este caso se trata de la ruta con la menor distancia entre estaciones.
  */
-public class MenorDistancia implements RutaOptima{
+public class MenorDistancia implements RutaOptima {
 
     /**
      * Método principal de la interfaz, calculará una trayectoria de estaciones dado un grafo dirigido y los vértices origen y destino.
@@ -17,26 +17,40 @@ public class MenorDistancia implements RutaOptima{
      * @param destino la estacion destino.
      * @return una lista que supone una trayectoria del origen al destino.
      */
-    public List<Estacion> calculaRuta(GraficaDirigida<Estacion> grafo, Estacion origen, Estacion destino){
-        return reseteaPesos(grafo).dijkstraElementos(origen, destino);
+    public List<Estacion> calculaRuta(GraficaDirigida<Estacion> grafo, Estacion origen, Estacion destino) {
+        // Modificamos directamente los pesos en el grafo original
+        GraficaDirigida<Estacion> grafoDistancia = reseteaPesos(grafo);
 
+        return grafoDistancia.dijkstraElementos(origen, destino);
     }
 
     /**
-     * Método que resetea los pesos del grafo en base a la distancia euclidiana entre estaciones.
+     * Método que actualiza los pesos del grafo en base a la distancia euclidiana entre estaciones.
      * @param grafo un grafo dirigido de estaciones.
-     * @return una copia del grafo recibido pero cuyas aritas pesan la distancia entre estaciones.
      */
-    private GraficaDirigida<Estacion> reseteaPesos(GraficaDirigida<Estacion> grafo){
-        for(Estacion estacion : grafo.obtenerElementos()){
-            for(Estacion vecino : grafo.obtenerVecinos(estacion)){
-                grafo.setPeso(estacion, vecino, distancia(estacion, vecino));
+    private GraficaDirigida<Estacion> reseteaPesos(GraficaDirigida<Estacion> grafo) {
+        for (Estacion estacion : grafo.obtenerElementos()) {
+            for (Estacion vecino : grafo.obtenerVecinos(estacion)) {
+                // Actualizamos el peso solo si es necesario
+                if (grafo.getPeso(estacion, vecino) == 1) {
+                    grafo.setPeso(estacion, vecino, distancia(estacion, vecino));
+                }
             }
         }
 
         return grafo;
     }
 
+    private void reseteaPesosUnitarios(GraficaDirigida<Estacion> grafo){
+        for (Estacion estacion : grafo.obtenerElementos()) {
+            for (Estacion vecino : grafo.obtenerVecinos(estacion)) {
+                // Actualizamos el peso solo si es necesario
+                if (!grafo.sonVecinos(estacion, vecino) && grafo.getPeso(estacion, vecino) == 1) {
+                    grafo.setPeso(estacion, vecino, distancia(estacion, vecino));
+                }
+            }
+        }
+    }
 
     /**
      * Calcula la distancia entre dos estaciones.
@@ -49,5 +63,4 @@ public class MenorDistancia implements RutaOptima{
         double distanciaY = estacionA.getCoordY() - estacionB.getCoordY();
         return Math.sqrt(distanciaX * distanciaX + distanciaY * distanciaY);
     }
-
 }
