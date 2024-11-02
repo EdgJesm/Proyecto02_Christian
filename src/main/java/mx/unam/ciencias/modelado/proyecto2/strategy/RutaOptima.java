@@ -16,4 +16,6 @@ public interface RutaOptima{
      * @return una lista que supone una trayectoria del origen al destino.
      */
     public List<Estacion> calculaRuta(GraficaDirigida<Estacion> grafo, Estacion origen, Estacion destino);
+
+    public double operacion(Estacion a, Estacion b);
 }

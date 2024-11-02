@@ -21,4 +21,8 @@ public class MenorNumeroDeParadas implements RutaOptima{
         return grafo.trayectoriaMinimaElementos(origen, destino);
     }
 
+    @Override public double operacion(Estacion a, Estacion b){
+        return 1.0;
+    }
+
 }

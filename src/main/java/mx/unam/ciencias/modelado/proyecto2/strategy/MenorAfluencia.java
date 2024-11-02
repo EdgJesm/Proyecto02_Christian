@@ -45,5 +45,8 @@ public class MenorAfluencia implements RutaOptima{
         return grafoAfluencia;
     }
 
+    @Override public double operacion(Estacion a, Estacion b){
+        return a.getAfluencia();
+    }
 
 }

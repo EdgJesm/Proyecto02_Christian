@@ -30,11 +30,12 @@ public class Prueba{
 
         Estacion origen = new Estacion(7.7, 5.9, 24.0, ColorHex.NEGRO, "BaseMetroCU");
         Estacion origen2 = new Estacion(7.3, 7.8, 17.0, ColorHex.NEGRO, "TVUNAM");
+        Estacion origen3 = new Estacion(7.3, 7.8, 17.0, ColorHex.NEGRO, "TVUNAM");
         Estacion destino = new Estacion(7.3, 6.9, 17.0, ColorHex.NEGRO, "TiendaUNAM1");
         Estacion destino2 = new Estacion(5.3, 6.1, 17.0, ColorHex.NEGRO, "DGTIC");
         System.err.println("Trayectoria establecida.");
         
-        RutaOptima criterio = new MenorDistancia();
+        RutaOptima criterio = new MenorAfluencia();
         System.err.println("Criterio establecido.");
 
         List<Estacion> trayectoria = sistema.buscaRuta(origen2, destino2, criterio);

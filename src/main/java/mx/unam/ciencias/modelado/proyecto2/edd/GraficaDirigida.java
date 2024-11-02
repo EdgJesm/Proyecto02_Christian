@@ -915,10 +915,15 @@ public class GraficaDirigida<T> implements Coleccion<T> {
         //Procedemos con la construcción de la trayectoria.
         Vertice u = t;//Partimos del vértice destino.
         while(u != s){//Hasta que u sea el origen.
-            //System.err.println("Checando apuntadores: " + u.get());
+            System.err.println("Checando apuntadores: " + u.get());
             for(Vecino vc : u.apuntadores.values()){
                 //Si damos con un vecino que tal que d(u)-1 = d(vc.vecino)
-                //System.err.println("    : " + vc.get());
+                System.err.println("    : " + vc.get());
+                if(u.get().equals(vc.get())){
+                    System.err.println("DIMOS CON UN LAZO");
+                    desconecta(u.get(), vc.get());
+                }
+
                 if(u.distancia - vc.peso == vc.vecino.distancia){
                     //Metemos a 'u' y actualizamos su valor al del vértice siguiente.
                     trayectoria.add(0, u);

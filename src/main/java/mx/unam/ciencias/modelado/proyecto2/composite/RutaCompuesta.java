@@ -54,8 +54,46 @@ public class RutaCompuesta implements Ruta{
      * @return una lista que supone una trayectoria.
      */
     @Override public List<Estacion> buscaRuta(Estacion origen, Estacion destino, RutaOptima rutaOptima){
+        GraficaDirigida<Estacion> combinada = combinaRutaCompuesta(rutaOptima);
 
-        return rutaOptima.calculaRuta(getGrafica(), origen, destino);
+        return combinada.dijkstraElementos(origen, destino);
+
+    }
+
+    private GraficaDirigida<Estacion> combinaRutaCompuesta(RutaOptima rutaOptima){
+        GraficaDirigida<Estacion> combinada = new GraficaDirigida<>(); 
+
+        for (GraficaDirigida<Estacion> grafica : grafica.obtenerElementos()) {
+            agregarVertices(grafica, combinada);
+        }
+
+        for (GraficaDirigida<Estacion> grafica : grafica.obtenerElementos()) {
+            agregarConexiones(grafica, combinada, rutaOptima);
+        }
+
+        return combinada;
+
+    }
+
+    private void agregarVertices(GraficaDirigida<Estacion> grafica, GraficaDirigida<Estacion> graficaCombinada){
+        for(Estacion estacion : grafica.obtenerElementos()){
+            if (!graficaCombinada.contiene(estacion)) {
+                // Agregar el nuevo vértice a la gráfica combinada
+                graficaCombinada.agrega(estacion);
+            }
+        }
+    }
+
+    private void agregarConexiones(GraficaDirigida<Estacion> grafica, GraficaDirigida<Estacion> graficaCombinada, RutaOptima rutaOptima){
+        for (Estacion estacion : grafica.obtenerElementos()) {
+            // Agregar conexiones de los vecinos
+            for (Estacion vecino : grafica.obtenerVecinos(estacion)) {
+                if (!graficaCombinada.sonVecinos(estacion, vecino)) {
+                    graficaCombinada.conecta(estacion, vecino, rutaOptima.operacion(estacion, vecino)); // Conectar desde el elemento actual al vecino
+                }
+            }
+
+        }
     }
 
     /**

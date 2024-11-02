@@ -58,4 +58,8 @@ public class MenorDistancia implements RutaOptima {
         double distanciaY = estacionA.getCoordY() - estacionB.getCoordY();
         return Math.sqrt(distanciaX * distanciaX + distanciaY * distanciaY);
     }
+
+    @Override public double operacion(Estacion a, Estacion b){
+        return distancia(a, b);
+    }
 }
