@@ -35,7 +35,7 @@ public class Prueba{
         Estacion destino2 = new Estacion(5.3, 6.1, 17.0, ColorHex.NEGRO, "DGTIC");
         System.err.println("Trayectoria establecida.");
         
-        RutaOptima criterio = new MenorAfluencia();
+        RutaOptima criterio = new MenorDistancia();
         System.err.println("Criterio establecido.");
 
         List<Estacion> trayectoria = sistema.buscaRuta(origen2, destino2, criterio);

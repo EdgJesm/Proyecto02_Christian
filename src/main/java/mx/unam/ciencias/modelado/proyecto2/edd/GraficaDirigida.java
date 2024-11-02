@@ -921,7 +921,7 @@ public class GraficaDirigida<T> implements Coleccion<T> {
                 System.err.println("    : " + vc.get());
                 if(u.get().equals(vc.get())){
                     System.err.println("DIMOS CON UN LAZO");
-                    desconecta(u.get(), vc.get());
+                    //desconecta(u.get(), vc.get());
                 }
 
                 if(u.distancia - vc.peso == vc.vecino.distancia){

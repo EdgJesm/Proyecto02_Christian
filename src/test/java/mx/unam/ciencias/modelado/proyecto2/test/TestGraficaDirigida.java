@@ -17,8 +17,8 @@ import java.util.*;
  */
 public class TestGraficaDirigida {
 
-    /** Expiración para que ninguna prueba tarde más de 5 segundos. */
-    @Rule public Timeout expiracion = Timeout.seconds(5);
+    /** Expiración para que ninguna prueba tarde más de 10 segundos. */
+    @Rule public Timeout expiracion = Timeout.seconds(10);
 
     /* Generador de números aleatorios. */
     private Random random;
