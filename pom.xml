@@ -9,9 +9,9 @@
   <version>MYP</version>
   <packaging>jar</packaging>
 
-  <name>Proyecto02</name>
+  <name>Práctica 1</name>
   <description>
-    Proyecto02: Rutas optimas para el uso del Pumabus.
+    Práctica 2: Template, State, Decorator e Iterator.
   </description>
   <organization>
     <name>Christian</name>

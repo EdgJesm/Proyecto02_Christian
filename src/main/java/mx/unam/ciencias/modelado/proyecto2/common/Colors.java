@@ -1,4 +1,4 @@
-package mx.unam.ciencias.modelado.proyecto1.common;
+package mx.unam.ciencias.modelado.proyecto2.common;
 
 /**
  * Clase que se encarga de guardar <strong>las cadenas de formato</strong> para la terminal.
