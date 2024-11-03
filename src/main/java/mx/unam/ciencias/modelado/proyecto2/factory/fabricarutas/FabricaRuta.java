@@ -39,7 +39,9 @@ public abstract class FabricaRuta implements Ruta{
         for (String linea : lineas) {
             String[] datos = linea.split(",");
             Estacion estacion = fabricaEstacion(datos);
-            graficaDirigida.agrega(estacion);
+            if(!graficaDirigida.contiene(estacion)){
+                graficaDirigida.agrega(estacion);
+            }
             estaciones.add(estacion);
         }
         
