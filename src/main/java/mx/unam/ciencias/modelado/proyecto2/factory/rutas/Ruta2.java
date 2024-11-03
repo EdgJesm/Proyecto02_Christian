@@ -9,18 +9,19 @@ import java.util.List;
 */
 public class Ruta2 extends FabricaRuta {
 
-  private final String NOMBRE = "Ruta 2";
+    private final String NOMBRE = "Ruta 2";
 
-  public Ruta2(List<String> lineas){
-    super(lineas);
-  }
+    public Ruta2(List<String> lineas){
+        super(lineas);
+    }
 
-  /**
-  * Método para fabricar nuestra estación (Ruta1).
-  * @param datos datos para poder crear nuestra ruta 1.
-  * @return Estacion nueva estación creada a partir de los datos.
-  */
-  @Override public Estacion fabricaEstacion(String[] datos) {
+    /**
+     * Método para fabricar nuestra estación (Ruta2).
+     * @param datos datos para poder crear nuestra ruta 1.
+     * @return Estacion nueva estación creada a partir de los datos.
+     */
+    @Override
+    public Estacion fabricaEstacion(String[] datos) {
         // Verificar que el arreglo de datos tenga la longitud correcta
         if (datos.length < 4) {
             throw new IllegalArgumentException("Datos insuficientes para crear una estación.");
@@ -41,16 +42,16 @@ public class Ruta2 extends FabricaRuta {
             throw new IllegalArgumentException("Formato de número inválido: " + e.getMessage());
         }
 
-        // Crear una instancia de ColorHex con un color trivial, por ejemplo, rojo
-        ColorHex colorVertice = ColorHex.AMARILLO;
+        ColorHex colorVertice = ColorHex.RUTA2;
 
         // Retornar una nueva instancia de Estacion
         return new Estacion(coordX, coordY, afluencia, colorVertice, nombre);
-  }
-  /**
-   * Getter para el nombre de nuestra Ruta.
-   * @return String NOMBRE nombre de la ruta.
-   */
-  @Override
-  public String getNombre(){return this.NOMBRE;}
+    }
+
+    /**
+     * Getter para el nombre de nuestra Ruta.
+     * @return String NOMBRE nombre de la ruta.
+     */
+    @Override
+    public String getNombre(){return this.NOMBRE;}
 }

@@ -33,10 +33,10 @@ public class GraficadorGrafo<T extends VerticeCoordenado> {
     /**Color de los textos. */
     private static final ColorHex COLOR_TEXTO = ColorHex.NEGRO;
     /**Ancho de las lineas a dibujar. */
-    private static final int ANCHO_LINEA = 2; 
+    private static final int ANCHO_LINEA = 4; 
 
     /**Constante de escala, permite que se modifique el tamaño de lo que se va a graficar */
-    private static final double ESCALA = 100;
+    private static final double ESCALA = 200;
 
     /**
      * Constructor de la clase, asigna atributos.
@@ -102,7 +102,7 @@ public class GraficadorGrafo<T extends VerticeCoordenado> {
                 double x2 = ESCALA * vecino.getCoordX();
                 double y2 = ESCALA * vecino.getCoordY();
 
-                sb.append(traductor.dibujaLinea(x1, y1, x2, y2, vertice.getColorVertice(), ANCHO_LINEA));
+                sb.append(traductor.dibujaLinea(x1, y1, x2, y2, vecino.getColorVertice(), ANCHO_LINEA));
 
             }
         }

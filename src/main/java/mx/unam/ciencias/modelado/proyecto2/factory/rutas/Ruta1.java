@@ -3,16 +3,17 @@ package mx.unam.ciencias.modelado.proyecto2.factory.rutas;
 import mx.unam.ciencias.modelado.proyecto2.factory.fabricarutas.*;
 import mx.unam.ciencias.modelado.proyecto2.graficable.ColorHex;
 import java.util.List;
+
 /*
 * Clase para crear nuestra Ruta 1
 */
 public class Ruta1 extends FabricaRuta {
 
-  private final String NOMBRE = "Ruta 1";
+    private final String NOMBRE = "Ruta 1";
 
-  public Ruta1(List<String> lineas){
-    super(lineas);
-  }
+    public Ruta1(List<String> lineas){
+        super(lineas);
+    }
 
     /**
      * Método para fabricar nuestra estación (Ruta1).
@@ -41,17 +42,16 @@ public class Ruta1 extends FabricaRuta {
             throw new IllegalArgumentException("Formato de número inválido: " + e.getMessage());
         }
 
-        // Crear una instancia de ColorHex con un color trivial, por ejemplo, rojo
-        ColorHex colorVertice = ColorHex.NEGRO;
+        ColorHex colorVertice = ColorHex.RUTA1;
 
         // Retornar una nueva instancia de Estacion
         return new Estacion(coordX, coordY, afluencia, colorVertice, nombre);
     }
 
-  /**
-   * Getter para el nombre de nuestra Ruta.
-   * @return String NOMBRE nombre de la ruta.
-   */
-  @Override
-  public String getNombre(){return this.NOMBRE;}
+    /**
+     * Getter para el nombre de nuestra Ruta.
+     * @return String NOMBRE nombre de la ruta.
+     */
+    @Override
+    public String getNombre(){return this.NOMBRE;}
 }
