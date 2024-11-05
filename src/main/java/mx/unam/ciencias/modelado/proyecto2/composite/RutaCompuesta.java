@@ -109,4 +109,8 @@ public class RutaCompuesta implements Ruta{
         return rutas;
     }
 
+    @Override public String toString(){
+        return getNombre();
+    }
+
 }

@@ -76,6 +76,10 @@ public abstract class FabricaRuta implements Ruta{
         return ruta.obtenerElementos();
     }
 
+    @Override public String toString(){
+        return getNombre();
+    }
+
     /**
      * Método que verifica si existe una estación en la gráfica
      * @param Estacion elemento estacion a verificar existencia
