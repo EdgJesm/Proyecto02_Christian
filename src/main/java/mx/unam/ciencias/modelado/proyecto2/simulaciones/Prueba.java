@@ -1,13 +1,18 @@
 package mx.unam.ciencias.modelado.proyecto2.simulaciones;
 
+import javafx.application.Application; // Importa Application de JavaFX
+import javafx.stage.Stage; // Importa Stage si lo necesitas
 import mx.unam.ciencias.modelado.proyecto2.common.ReaderWriter;
 import mx.unam.ciencias.modelado.proyecto2.graficable.*;
 import mx.unam.ciencias.modelado.proyecto2.strategy.*;
 import mx.unam.ciencias.modelado.proyecto2.composite.*;
 import mx.unam.ciencias.modelado.proyecto2.factory.fabricarutas.*;
 import mx.unam.ciencias.modelado.proyecto2.factory.rutas.*;
+import mx.unam.ciencias.modelado.proyecto2.menus.Menu;
+
 //import mx.unam.ciencias.modelado.proyecto2.edd.GraficaDirigida;
-import java.util.List;
+import java.util.*;
+
 
 public class Prueba{
 
@@ -45,6 +50,16 @@ public class Prueba{
         sistema.agrega(r11);
         sistema.agrega(r12);
         System.err.println("Rutas agregadas.");
+
+        List<RutaOptima> criteriosOptimos = List.of(new MenorAfluencia(), new MenorNumeroDeParadas());
+
+
+        // Inicializa el menú
+        Menu menu = new Menu();
+        menu.inicializaDatos(sistema, criteriosOptimos);
+
+        // Llama a launch en la clase Menu
+        Application.launch(Menu.class, args); // Esto iniciará el menú
 
 
         Estacion origen = new Estacion(7.7, 5.9, 24.0, ColorHex.NEGRO, "BaseMetroCU");

@@ -1,5 +1,8 @@
 package mx.unam.ciencias.modelado.proyecto2;
 
+import mx.unam.ciencias.modelado.proyecto2.simulaciones.Prueba;
+
+
 //import mx.unam.ciencias.modelado.proyecto1.proxy.ClienteRemoto;
 
 /**
@@ -13,6 +16,6 @@ public class Main {
      */
     public static void main(String[] args) {
 
-        System.out.println("Hola mundo :)");
+        Prueba.main(args);
     }
 }
