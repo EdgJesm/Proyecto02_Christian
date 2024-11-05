@@ -79,7 +79,6 @@
         <version>0.0.5</version> <!-- O la versión más reciente -->
         <configuration>
           <mainClass>mx.unam.ciencias.modelado.proyecto2.Main</mainClass>
-          <modulePath>/usr/lib/javafx-sdk-21.0.5/lib</modulePath>
           <addModules>javafx.controls,javafx.fxml</addModules>
         </configuration>
       </plugin>
