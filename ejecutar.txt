@@ -7,7 +7,7 @@ Para complar los .class
 
 Para ejecutar
     Con el pom:
-        java --module-path /usr/lib/javafx-sdk-21.0.5/lib/ --add-modules javafx.controls,javafx.fxml -jar target/proyecto2.jar
+        mvn javafx:run
 
     Con javaC:
         java --module-path /usr/lib/javafx-sdk-21.0.5/lib/ --add-modules javafx.controls,javafx.fxml -cp bin mx.unam.ciencias.modelado.proyecto2.Main
