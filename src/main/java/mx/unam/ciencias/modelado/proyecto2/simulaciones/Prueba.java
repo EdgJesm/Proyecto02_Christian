@@ -8,7 +8,7 @@ import mx.unam.ciencias.modelado.proyecto2.strategy.*;
 import mx.unam.ciencias.modelado.proyecto2.composite.*;
 import mx.unam.ciencias.modelado.proyecto2.factory.fabricarutas.*;
 import mx.unam.ciencias.modelado.proyecto2.factory.rutas.*;
-import mx.unam.ciencias.modelado.proyecto2.menus.Menu;
+import mx.unam.ciencias.modelado.proyecto2.menus.*;
 
 //import mx.unam.ciencias.modelado.proyecto2.edd.GraficaDirigida;
 import java.util.*;
@@ -55,11 +55,7 @@ public class Prueba{
 
 
         // Inicializa el menú
-        Menu menu = new Menu();
-        menu.inicializaDatos(sistema, criteriosOptimos);
-
-        // Llama a launch en la clase Menu
-        Application.launch(Menu.class, args); // Esto iniciará el menú
+        Menu.launchMenu(sistema, criteriosOptimos);
 
 
         Estacion origen = new Estacion(7.7, 5.9, 24.0, ColorHex.NEGRO, "BaseMetroCU");
