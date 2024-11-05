@@ -1,0 +1,13 @@
+Para complar los .class
+    Con el pom:
+        mvn install
+
+    Con javaC:
+        javac --module-path /usr/lib/javafx-sdk-21.0.5/lib/ --add-modules javafx.controls,javafx.fxml -d bin $(find src/main -name "*.java")
+
+Para ejecutar
+    Con el pom:
+        java --module-path /usr/lib/javafx-sdk-21.0.5/lib/ --add-modules javafx.controls,javafx.fxml -jar target/proyecto2.jar
+
+    Con javaC:
+        java --module-path /usr/lib/javafx-sdk-21.0.5/lib/ --add-modules javafx.controls,javafx.fxml -cp bin mx.unam.ciencias.modelado.proyecto2.Main
