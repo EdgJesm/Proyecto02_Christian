@@ -17,7 +17,15 @@ public class MenorAfluencia implements RutaOptima{
      * @param destino la estacion destino.
      * @return una lista que supone una trayectoria del origen al destino.
      */
-    public List<Estacion> calculaRuta(GraficaDirigida<Estacion> grafo, Estacion origen, Estacion destino){
+    @Override public List<Estacion> calculaRuta(GraficaDirigida<Estacion> grafo, Estacion origen, Estacion destino){
         return grafo.dijkstraElementos(origen, destino);
+    }
+
+    /**
+     * Método toString, se hizo para practicidad con javaFX.
+     * @return la cadena "Menor afluencia"
+     */
+    @Override public String toString(){
+        return "Menor afluencia";
     }
 }

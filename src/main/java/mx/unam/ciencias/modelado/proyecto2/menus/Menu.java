@@ -9,7 +9,10 @@ import javafx.stage.Stage;
 
 import mx.unam.ciencias.modelado.proyecto2.factory.fabricarutas.*;
 import mx.unam.ciencias.modelado.proyecto2.composite.*;
+import mx.unam.ciencias.modelado.proyecto2.graficable.*;
 import mx.unam.ciencias.modelado.proyecto2.strategy.RutaOptima;
+import mx.unam.ciencias.modelado.proyecto2.common.ReaderWriter;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -77,8 +80,9 @@ public class Menu extends Application {
                 RutaOptima rutaOptimaSeleccionada = comboRutasOptimas.getValue();
 
                 if (rutaSeleccionada != null && origen != null && destino != null && rutaOptimaSeleccionada != null) {
-                    List<Estacion> ruta = rutaCompuesta.buscaRuta(origen, destino, rutaOptimaSeleccionada);
-                    mostrarRuta(ruta);
+                    List<Estacion> trayectoria = rutaSeleccionada.buscaRuta(origen, destino, rutaOptimaSeleccionada);
+                    generaArchivo(rutaSeleccionada, trayectoria);
+                    mostrarRuta(trayectoria);
                 } else {
                     mostrarError("Por favor, selecciona todos los campos necesarios.");
                 }
@@ -98,6 +102,12 @@ public class Menu extends Application {
         alert.setHeaderText("La ruta seleccionada es:");
         alert.setContentText(ruta.stream().map(Estacion::toString).collect(Collectors.joining(" -> ")));
         alert.showAndWait();
+    }
+
+    private void generaArchivo(Ruta ruta, List<Estacion> trayectoria){
+        GraficadorBuilderSVG<Estacion> graficador = new GraficadorBuilderSVG<>(ruta.getGrafica());
+        graficador.setTrayectoria(trayectoria);
+        ReaderWriter.writeOverwrite(graficador.graficar(), graficador.getNombreArchivo());
     }
 
     private void mostrarError(String mensaje) {

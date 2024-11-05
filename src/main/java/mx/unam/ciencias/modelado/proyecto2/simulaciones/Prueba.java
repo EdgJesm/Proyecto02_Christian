@@ -68,7 +68,7 @@ public class Prueba{
         Estacion destino4 = new Estacion(2.4, 1.8, 17.0, ColorHex.NEGRO, "AAPAUNAM");
         Estacion destino5 = new Estacion(4.3, 2.4, 17.0, ColorHex.NEGRO, "Psicologia");
 
-
+        /*
         System.err.println("Trayectoria establecida.");
         
         RutaOptima criterio = new MenorAfluencia();
@@ -85,6 +85,7 @@ public class Prueba{
         System.out.println(graficador.graficar());
 
         System.err.println("lol??");
+        */
 
 
     }
