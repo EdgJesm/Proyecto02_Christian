@@ -1,4 +1,4 @@
-Para complar los .class
+Para compilar los .class
     Con el pom:
         mvn install
 
