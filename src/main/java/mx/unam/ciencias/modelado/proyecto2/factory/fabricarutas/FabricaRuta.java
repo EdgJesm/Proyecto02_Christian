@@ -68,9 +68,17 @@ public abstract class FabricaRuta implements Ruta{
     /**
      * Método que compone todo en una sola grafica dirigida.
      */
-    public GraficaDirigida<Estacion> getGrafica(){
+    @Override public GraficaDirigida<Estacion> getGrafica(){
         return ruta;
-    } 
+    }
+
+    @Override public List<Estacion> getEstaciones(){
+        return ruta.obtenerElementos();
+    }
+
+    @Override public String toString(){
+        return getNombre();
+    }
 
     /**
      * Método que verifica si existe una estación en la gráfica

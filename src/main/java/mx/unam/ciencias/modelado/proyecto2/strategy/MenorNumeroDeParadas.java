@@ -21,4 +21,12 @@ public class MenorNumeroDeParadas implements RutaOptima{
         return grafo.trayectoriaMinimaElementos(origen, destino);
     }
 
+    /**
+     * Método toString, se hizo para practicidad con javaFX.
+     * @return la cadena "Menor número de paradas"
+     */
+    @Override public String toString(){
+        return "Menor número de paradas";
+    }
+
 }

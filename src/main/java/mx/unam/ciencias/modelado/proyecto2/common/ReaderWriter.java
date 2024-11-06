@@ -73,6 +73,33 @@ public class ReaderWriter {
     }
 
     /**
+     * Método para escribir una cadena en un archivo, sobrescribiendo cualquier contenido existente.
+     * @param contenido el texto que se quiere escribir.
+     * @param fileName el nombre del archivo en el cual se va a escribir.
+     */
+    public static void writeOverwrite(String contenido, String fileName) {
+        FileWriter out = null;
+
+        try {
+            // Crear el FileWriter en modo de sobrescritura (append = false)
+            out = new FileWriter(fileName, false);
+            out.write(contenido);
+            out.write("\n"); // Opcional: agrega un salto de línea al final
+        } catch (IOException e) {
+            System.out.println(e);
+        } finally {
+            try {
+                if (out != null) {
+                    out.close();
+                }
+            } catch (IOException e) {
+                System.out.println(e);
+            }
+        }
+    }
+
+
+    /**
      * Método para escribir una lista de cadenas en un archivo.
      * Sobrescribe cualquier contenido existente en el archivo.
      * @param lineas la lista de cadenas a escribir.

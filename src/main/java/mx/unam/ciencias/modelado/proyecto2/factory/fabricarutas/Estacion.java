@@ -112,6 +112,6 @@ public class Estacion implements VerticeCoordenado {
     }
 
     @Override public String toString(){
-        return descripcion + ", " + coordX +", " + coordY + ", " + colorVertice.getCodigoColor();
+        return getDescripcion();
     }
 }

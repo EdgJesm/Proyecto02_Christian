@@ -11,6 +11,8 @@ public class GraficadorBuilderSVG<T extends VerticeCoordenado> {
     private List<T> trayectoria;
     /** Graficador de gráficos */
     private GraficadorGrafo<T> graficador;
+    /** Nombre predeterminado de los archivos */
+    private String nombreArchivo = "Grafica.svg";
 
     /**
      * Constructor de BuildGraficador.
@@ -30,6 +32,10 @@ public class GraficadorBuilderSVG<T extends VerticeCoordenado> {
      */
     public GraficadorBuilderSVG<T> setTrayectoria(List<T> trayectoria) {
         this.trayectoria = trayectoria;
+        T primero = trayectoria.get(0);
+        T ultimo = trayectoria.get(trayectoria.size() - 1);
+        nombreArchivo = primero.toString() + "-" + ultimo.toString() + ".svg";
+
         return this;
     }
 
@@ -59,5 +65,9 @@ public class GraficadorBuilderSVG<T extends VerticeCoordenado> {
 
         // Retornar el resultado SVG generado por GraficadorGrafo
         return graficador.toString();
+    }
+
+    public String getNombreArchivo(){
+        return nombreArchivo;
     }
 }

@@ -1,50 +1,242 @@
 package mx.unam.ciencias.modelado.proyecto2.menus;
 
-import mx.unam.ciencias.modelado.proyecto2.factory.fabricarutas.Estacion;
-//import mx.unam.ciencias.modelado.proyecto2.;
-// import mx.unam.ciencias.modelado.proyecto2 ... ;
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
-import java.util.*;
+import org.apache.batik.transcoder.TranscoderInput;
+import org.apache.batik.transcoder.TranscoderOutput;
+import org.apache.batik.transcoder.image.PNGTranscoder;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+
+import mx.unam.ciencias.modelado.proyecto2.factory.fabricarutas.*;
+import mx.unam.ciencias.modelado.proyecto2.composite.*;
+import mx.unam.ciencias.modelado.proyecto2.graficable.*;
+import mx.unam.ciencias.modelado.proyecto2.strategy.RutaOptima;
+import mx.unam.ciencias.modelado.proyecto2.common.ReaderWriter;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
-* Clase Menu que crea un menú orientado al cliente para navegar en la app
-*/
-public class Menu {
+ * Clase menu que contempla toda la logica en la que el usuario puede generar su ruta.
+ */
+public class Menu extends Application {
 
-    // Atributos de la clase
-    private Estacion origen;
-    private Estacion destino;
+    /**Ruta compuesta, es necesario que acceda al sistema completo. */
+    private RutaCompuesta rutaCompuesta;
+    /**Lista de estrategias que son los criterios de optimización. */
+    private List<RutaOptima> rutasOptimas;
+
+    /**Variable estatica que será un valor momentaneo para la rutaCompuesta. */
+    private static RutaCompuesta inicialRutaCompuesta;
+        /**Variable estatica que será un valor momentaneo para la lista de rutas otpimas.. */
+    private static List<RutaOptima> inicialRutasOptimas;
+
+    // Constructor vacío para JavaFX
+    public Menu() {}
 
     /**
-     * Método que genera el menú de las estaciones.
-     * @param estaciones todas las estaciones existentes.
-     * @return String menu de las estaciones
+     * Método launcher que inicializa la aplicación.
+     * @param rutaCompuesta el sistema al que accede el usuario.
+     * @param rutasOptimas la lista de criterios de optimización.
      */
-    private String menuEstaciones(List<Estacion> estaciones) {
-      StringBuilder str = new StringBuilder();
-      str.append("----- Menu de estaciones -----");
-      str.append("______________________________");
-      for(Estacion estacion: estaciones){
-        // str.append(estacion.hashCode + "> " + estacion.toString());
-      }
-      return str.toString();
+    public static void launchMenu(RutaCompuesta rutaCompuesta, List<RutaOptima> rutasOptimas) {
+        // Guardar temporalmente los datos necesarios en variables estáticas
+        inicialRutaCompuesta = rutaCompuesta;
+        inicialRutasOptimas = rutasOptimas;
+
+        // Iniciar la aplicación JavaFX
+        Application.launch(Menu.class);
     }
+
     /**
-     * Método para poder seleccionar una estación .
-     * @return Estacion estación seleccionada.
+     * Implementación del método start()
+     * @param primaryStage la ventana que será la interfaz de usuario.
      */
-    public Estacion eligeEstacion(){
-      return null;
+    @Override public void start(Stage primaryStage) {
+        // Este método se ejecuta en el hilo de JavaFX
+        Platform.runLater(() -> {
+            // Inicializar los datos y liberar referencias estáticas
+            rutaCompuesta = inicialRutaCompuesta;
+            rutasOptimas = inicialRutasOptimas;
+            inicialRutaCompuesta = null;
+            inicialRutasOptimas = null;
+
+            // Verificación de datos
+            if (rutaCompuesta == null || rutasOptimas == null) {
+                mostrarError("Los datos no pueden ser nulos. Asegúrate de inicializarlos correctamente.");
+                return;
+            }
+
+            // Crear ComboBoxes
+            ComboBox<Ruta> comboRutas = new ComboBox<>();
+            comboRutas.getItems().addAll(rutaCompuesta.getRutas());
+
+            ComboBox<Estacion> comboEstacionOrigen = new ComboBox<>();
+            ComboBox<Estacion> comboEstacionDestino = new ComboBox<>();
+
+            ComboBox<RutaOptima> comboRutasOptimas = new ComboBox<>();
+            comboRutasOptimas.getItems().addAll(rutasOptimas);
+
+            comboRutas.setOnAction(e -> {
+                Ruta rutaSeleccionada = comboRutas.getValue();
+                if (rutaSeleccionada != null) {
+                    List<Estacion> estaciones = rutaSeleccionada.getEstaciones();
+                    comboEstacionOrigen.getItems().setAll(estaciones);
+                    comboEstacionDestino.getItems().setAll(estaciones);
+                }
+            });
+
+            Button button = new Button("Buscar Ruta");
+            button.setOnAction(e -> {
+                Ruta rutaSeleccionada = comboRutas.getValue();
+                Estacion origen = comboEstacionOrigen.getValue();
+                Estacion destino = comboEstacionDestino.getValue();
+                RutaOptima rutaOptimaSeleccionada = comboRutasOptimas.getValue();
+
+                if (rutaSeleccionada != null && origen != null && destino != null && rutaOptimaSeleccionada != null) {
+                    List<Estacion> trayectoria = rutaSeleccionada.buscaRuta(origen, destino, rutaOptimaSeleccionada);
+                    String svgFilePath = generaArchivo(rutaSeleccionada, trayectoria); // Obtenemos la ruta del SVG generado
+                    mostrarRuta(svgFilePath); // Mostramos la imagen generada
+                } else {
+                    mostrarError("Por favor, selecciona todos los campos necesarios.");
+                }
+            });
+
+            VBox vbox = new VBox(10, comboRutas, comboEstacionOrigen, comboEstacionDestino, comboRutasOptimas, button);
+            Scene scene = new Scene(vbox, 400, 300);
+            primaryStage.setScene(scene);
+            primaryStage.setTitle("Seleccionar Ruta en RutaCompuesta");
+            primaryStage.show();
+        });
     }
+
     /**
-     * Método para crear un menú general.
-     * @return void.
+     * Método que muestra el archivo de imagen en une nueva ventana.
+     * @param pngFilePath la ruta del archivo png a mostrar.
      */
-    public void menuGeneral() {
-      StringBuilder str = new StringBuilder();
-      str.append("----- Menu general -----");
-      str.append("1 > Opcion .");
-      str.append("2 > Opcion .");
-      System.out.println(str.toString());
-      // while (true){}
+    private void mostrarRuta(String pngFilePath) {
+        try (InputStream imageStream = new FileInputStream(pngFilePath)) {
+            // Cargar la imagen PNG en JavaFX
+            Image image = new Image(imageStream);
+            ImageView imageView = new ImageView(image);
+            imageView.setPreserveRatio(true);
+            imageView.setFitWidth(600); // Ajustar según sea necesario
+
+            imageView.setOnScroll(event -> {
+                double delta = event.getDeltaY(); // Detecta el movimiento de la rueda del mouse o el gesto del mousepad.
+                
+                // Si el gesto es hacia arriba (hacia afuera), hacemos zoom in, si es hacia abajo (hacia adentro), zoom out
+                if (delta > 0) {
+                    imageView.setFitWidth(imageView.getFitWidth() * 1.1); // Aumentar tamaño
+                    imageView.setFitHeight(imageView.getFitHeight() * 1.1);
+                } else if (delta < 0) {
+                    imageView.setFitWidth(imageView.getFitWidth() * 0.9); // Reducir tamaño
+                    imageView.setFitHeight(imageView.getFitHeight() * 0.9);
+                }
+            });
+
+            // Habilitar el desplazamiento con el mouse (arrastrando la imagen)
+            imageView.setOnMousePressed(event -> {
+                // Calcular la diferencia entre la posición donde se hace clic y la posición de la imagen
+                double offsetX = event.getSceneX() - imageView.getTranslateX();
+                double offsetY = event.getSceneY() - imageView.getTranslateY();
+                imageView.setUserData(new double[]{offsetX, offsetY});
+            });
+
+            imageView.setOnMouseDragged(event -> {
+                // Recuperar el desplazamiento registrado
+                double[] offset = (double[]) imageView.getUserData();
+                if (offset != null) {
+                    // Mover la imagen según el desplazamiento
+                    imageView.setTranslateX(event.getSceneX() - offset[0]);
+                    imageView.setTranslateY(event.getSceneY() - offset[1]);
+                }
+            });
+
+            // Crear una ScrollPane para hacer la imagen desplazable
+            ScrollPane scrollPane = new ScrollPane();
+            scrollPane.setContent(imageView);
+            scrollPane.setFitToWidth(true); // Ajustar a la pantalla
+            scrollPane.setFitToHeight(true);
+            scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+            scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+
+            // Crear una nueva ventana para mostrar la imagen
+            Stage stage = new Stage();
+            VBox vbox = new VBox(imageView);
+            Scene scene = new Scene(vbox);
+            stage.setScene(scene);
+            stage.setTitle("Ruta Calculada");
+            stage.show();
+
+        } catch (Exception e) {
+            mostrarError("Error al mostrar la imagen de la ruta: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Método que genera el archivo .svg y despues el .png de la grafica que construimos.
+     * @param ruta una instancia de ruta (que debe contener la grafica a graficar).
+     * @param trayectoria la lista de estaciones que constituyen la trayectoria de una estacion a otra.
+     * @return el nombre del archivo para poder acceder a él desde otro lado.
+     */
+    private String generaArchivo(Ruta ruta, List<Estacion> trayectoria){
+        GraficadorBuilderSVG<Estacion> graficador = new GraficadorBuilderSVG<>(ruta.getGrafica());
+        graficador.setTrayectoria(trayectoria);
+
+        // Guardamos el archivo SVG temporalmente
+        String svgFilePath = graficador.getNombreArchivo();
+        ReaderWriter.writeOverwrite(graficador.graficar(), svgFilePath);
+
+        // Convertimos el SVG a PNG
+        String pngFilePath = graficador.getNombreArchivo().replace(".svg",".png");
+        convertirSVGaPNG(svgFilePath, pngFilePath);
+
+        // Devuelve la ruta del archivo PNG generado
+        return pngFilePath;
+    }
+
+    /**
+     * Método que, dado un archivo svg, lo convierte a png.
+     * @param svgFilePath la ruta al svg
+     * @param pngFilePath la ruta al png
+     */
+    private void convertirSVGaPNG(String svgFilePath, String pngFilePath) {
+        try (FileInputStream svgInputStream = new FileInputStream(svgFilePath);
+            FileOutputStream pngOutputStream = new FileOutputStream(pngFilePath)) {
+
+            // Transcodificar SVG a PNG usando Batik
+            PNGTranscoder transcoder = new PNGTranscoder();
+            TranscoderInput input = new TranscoderInput(svgInputStream);
+            TranscoderOutput output = new TranscoderOutput(pngOutputStream);
+            transcoder.transcode(input, output);
+
+        } catch (Exception e) {
+            mostrarError("Error al convertir SVG a PNG: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Método para mostrar un errror en pantalla.
+     * @param mensaje el mensaje de error.
+     */
+    private void mostrarError(String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
     }
 }
