@@ -1,10 +1,9 @@
-package mx.unam.ciencias.modelado.proyecto2.menus;
+package mx.unam.ciencias.modelado.proyecto2.proxy;
 
 import mx.unam.ciencias.modelado.proyecto2.factory.fabricarutas.Estacion;
 import mx.unam.ciencias.modelado.proyecto2.strategy.RutaOptima;
 
 import mx.unam.ciencias.modelado.proyecto2.composite.RutaCompuesta;
-
 
 import java.util.List;
 /*

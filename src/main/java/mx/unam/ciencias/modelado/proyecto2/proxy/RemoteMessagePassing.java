@@ -1,4 +1,4 @@
-package proxy;
+package mx.unam.ciencias.modelado.proyecto2.proxy;
 
 import java.net.*;
 import java.io.*;

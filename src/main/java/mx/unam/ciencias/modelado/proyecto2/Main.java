@@ -1,6 +1,8 @@
 package mx.unam.ciencias.modelado.proyecto2;
 
 import mx.unam.ciencias.modelado.proyecto2.simulaciones.Prueba;
+import mx.unam.ciencias.modelado.proyecto2.proxy.ClienteRemoto;
+
 
 //import mx.unam.ciencias.modelado.proyecto1.proxy.ClienteRemoto;
 
@@ -16,6 +18,6 @@ public class Main {
    * client como argumento inicia el cliente
    */
     public static void main(String[] args) {
-        Prueba.main(args);
+        ClienteRemoto.iniciarCliente();
     }
 }

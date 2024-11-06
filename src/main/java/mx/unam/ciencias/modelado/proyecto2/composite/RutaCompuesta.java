@@ -4,6 +4,7 @@ import mx.unam.ciencias.modelado.proyecto2.edd.Grafica;
 import mx.unam.ciencias.modelado.proyecto2.edd.GraficaDirigida;
 import mx.unam.ciencias.modelado.proyecto2.factory.fabricarutas.Estacion;
 import mx.unam.ciencias.modelado.proyecto2.strategy.RutaOptima;
+import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -11,7 +12,9 @@ import java.util.ArrayList;
  * Clase para la ruta compuesta por otras rutas.
  * Consiste de un grafo compuesto por grafos dirigidos.
  */
-public class RutaCompuesta implements Ruta{
+public class RutaCompuesta implements Ruta, Serializable{
+    /**Para objetos serializables. */
+    private static final long serialVersionUID = 1L;
     /**La grafica de graficas dirigidas. */
     private Grafica<GraficaDirigida<Estacion>> grafica;
     /**Lista de todas las rutas que se agreguen. */

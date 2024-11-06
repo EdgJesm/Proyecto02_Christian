@@ -1,7 +1,5 @@
 package mx.unam.ciencias.modelado.proyecto2.simulaciones;
 
-import javafx.application.Application; // Importa Application de JavaFX
-import javafx.stage.Stage; // Importa Stage si lo necesitas
 import mx.unam.ciencias.modelado.proyecto2.common.ReaderWriter;
 import mx.unam.ciencias.modelado.proyecto2.graficable.*;
 import mx.unam.ciencias.modelado.proyecto2.strategy.*;

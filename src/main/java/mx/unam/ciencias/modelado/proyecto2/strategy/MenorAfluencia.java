@@ -2,13 +2,17 @@ package mx.unam.ciencias.modelado.proyecto2.strategy;
 
 import mx.unam.ciencias.modelado.proyecto2.edd.GraficaDirigida;
 import mx.unam.ciencias.modelado.proyecto2.factory.fabricarutas.Estacion;
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Implementacion de una de las estrategias para las rutas optimas.
  * En este caso se trata de la ruta con la minima afluencia en estaciones.
  */
-public class MenorAfluencia implements RutaOptima{
+public class MenorAfluencia implements RutaOptima, Serializable{
+
+    /**Para objetos serializables. */
+    private static final long serialVersionUID = 1L;
 
     /**
      * Método principal de la interfaz, calculará una trayectoria de estaciones dado un grafo dirigido y los vértices origen y destino.

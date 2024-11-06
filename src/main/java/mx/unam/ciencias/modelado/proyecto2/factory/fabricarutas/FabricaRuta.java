@@ -6,6 +6,7 @@ import mx.unam.ciencias.modelado.proyecto2.strategy.RutaOptima;
 import mx.unam.ciencias.modelado.proyecto2.composite.Ruta;
 import java.util.HashMap;
 import java.util.Map;
+import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -13,8 +14,11 @@ import java.util.ArrayList;
  * Fabrica del patrón factory. Se encarga principalmente de generar un diccionario
  * de objetos de tipo Ruta a partir de líneas de datos.
  */
-public abstract class FabricaRuta implements Ruta{
+public abstract class FabricaRuta implements Ruta, Serializable{
 
+    /**Para objetos serializables. */
+    private static final long serialVersionUID = 1L;
+    
     private GraficaDirigida<Estacion> ruta;
 
     /**

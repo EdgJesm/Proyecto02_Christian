@@ -1,4 +1,4 @@
-package mx.unam.ciencias.modelado.proyecto2.menus;
+package mx.unam.ciencias.modelado.proyecto2.proxy;
 
 import mx.unam.ciencias.modelado.proyecto2.composite.RutaCompuesta;
 import mx.unam.ciencias.modelado.proyecto2.strategy.*;
