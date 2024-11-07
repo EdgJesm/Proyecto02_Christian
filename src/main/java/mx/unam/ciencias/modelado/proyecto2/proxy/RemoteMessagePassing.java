@@ -5,24 +5,38 @@ import java.io.*;
 
 import java.io.Serializable;
 
-/*
- * Clase que modela el comportamiento de paso de mensajes remotos.
+/**
+ * Clase que modela el comportamiento de paso de mensajes remotos utilizando sockets.
+ * Permite enviar y recibir objetos de forma remota a través de un {@link Socket}.
+ * 
+ * @param <T> El tipo de objeto que se va a enviar o recibir, debe ser serializable.
  */
 public class RemoteMessagePassing<T extends Serializable> {
 
-    public Socket socket; //El socket usado para la comunicacion.
-    public ObjectOutputStream out; //El objeto de salida
-    public ObjectInputStream in; //El objeto de entrada
-    //public Object sending = new Object(); // Objecto para la sincronizacion durante el envio.
-    //public Object receiving = new Object(); // Objeto para la sincronizacion durante la recepcion.
+    /** El socket usado para la comunicación. */
+    public Socket socket;
+    
+    /** El objeto de salida utilizado para enviar objetos a través del socket. */
+    public ObjectOutputStream out;
+    
+    /** El objeto de entrada utilizado para recibir objetos desde el socket. */
+    public ObjectInputStream in;
+    
+    //public Object sending = new Object(); // Objeto para la sincronización durante el envío.
+    //public Object receiving = new Object(); // Objeto para la sincronización durante la recepción.
 
-    /*
-     * Metodo constructor.
-     * @param socket Un socket para enviar los objetos.
+    /**
+     * Constructor de la clase {@code RemoteMessagePassing}.
+     * 
+     * Establece la conexión utilizando un {@link Socket} y configura los flujos de entrada y salida
+     * para la transmisión de objetos serializables.
+     * 
+     * @param socket El socket a través del cual se establecerá la comunicación.
+     *               No debe ser {@code null}.
      */
     public RemoteMessagePassing(Socket socket) {
         if(socket == null){
-            System.out.println("El socket esta vacio.");
+            System.out.println("El socket está vacío.");
             return;
         }
         this.socket = socket;
@@ -34,10 +48,11 @@ public class RemoteMessagePassing<T extends Serializable> {
         }
     }
 
-    /*
-     * Metodo para enviar un objeto. Se sincroniza con la variable sending.
-     * Se envia el objeto a traves del ObjectOutputStream out.
-     * @param obj Un objeto que se pretende enviar.
+    /**
+     * Método para enviar un objeto de tipo {@code T} a través del socket.
+     * Utiliza el {@link ObjectOutputStream} para escribir el objeto al flujo de salida.
+     * 
+     * @param obj El objeto que se va a enviar. Este debe ser de un tipo que implemente {@link Serializable}.
      */
     public void send(T obj) {
         //synchronized(sending){
@@ -49,12 +64,14 @@ public class RemoteMessagePassing<T extends Serializable> {
         //}
     }
 
-    /*
-     * Metodo para recibir un objeto. Se sincroniza con la variable receiving.
-     * Se recibe el objeto a traves del ObjectInputStream in.
-     * @return El objeto leido de in.
+    /**
+     * Método para recibir un objeto de tipo {@code T} a través del socket.
+     * Utiliza el {@link ObjectInputStream} para leer el objeto desde el flujo de entrada.
+     * 
+     * @return El objeto recibido, o {@code null} si ocurre un error.
      */
-    @SuppressWarnings("unchecked") public T receive() {
+    @SuppressWarnings("unchecked") 
+    public T receive() {
         T value = null;
         //synchronized(receiving){
         try{
@@ -62,13 +79,10 @@ public class RemoteMessagePassing<T extends Serializable> {
             if(obj != null || obj.getClass().isAssignableFrom(value.getClass())){
                 value = (T) obj;
             }else {
-                System.out.println("Objeto con tipo distitno ");
+                System.out.println("Objeto con tipo distinto");
             }
-            //Se interpreta el objeto que se leera en el ObjectInputStream in.
-            //value = (T) in.readObject();
         } catch (ClassNotFoundException e){
             e.printStackTrace();
-
         } catch (IOException e){
             e.printStackTrace();
         }
@@ -76,9 +90,11 @@ public class RemoteMessagePassing<T extends Serializable> {
         return value;
     }
 
-    /*
-     * Metodo que cierra la comunicacion. Se cierra el socket
-     * y los ObjectOutputStream y ObjectInputStream.
+    /**
+     * Método para cerrar la comunicación. Cierra el {@link Socket}, el {@link ObjectOutputStream}
+     * y el {@link ObjectInputStream} asociados a esta instancia.
+     * 
+     * @throws IOException Si ocurre un error al cerrar los flujos o el socket.
      */
     public void close() throws IOException {
         try{

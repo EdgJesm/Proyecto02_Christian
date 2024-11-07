@@ -14,8 +14,13 @@ import java.util.List;
  */
 public class ClienteRemoto {
 
-    private static final int PORT = 12345; // Puerto para la conexión
-    private static final String HOST = "localhost"; // Host del servidor
+    /**Puerto para la conexión */
+    private static final int PORT = 12345;
+    /**Host del server. */
+    private static final String HOST = "localhost";
+
+    /**Constructor de la clase. */
+    public ClienteRemoto(){}
 
     /**
      * Método que inicia el servidor, configurando el sistema de rutas y criterios de optimización.

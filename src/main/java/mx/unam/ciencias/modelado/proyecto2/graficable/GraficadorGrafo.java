@@ -3,6 +3,17 @@ package mx.unam.ciencias.modelado.proyecto2.graficable;
 import mx.unam.ciencias.modelado.proyecto2.edd.GraficaDirigida;
 import java.util.*;
 
+/**
+ * Clase encargada de graficar un grafo dirigido, representado por vértices y aristas, 
+ * en un lienzo utilizando una escala definida. Los vértices son representados como círculos 
+ * y las aristas como líneas entre los vértices. Además, permite graficar rutas y 
+ * descripciones de los vértices en el lienzo.
+ * 
+ * <p>La clase utiliza un traductor para generar las representaciones gráficas, lo que 
+ * permite personalizar la forma en que se dibujan los vértices, las aristas y los textos.</p>
+ * 
+ * @param <T> El tipo de vértice que debe extender de {@link VerticeCoordenado}.
+ */
 public class GraficadorGrafo<T extends VerticeCoordenado> {
 
     /** La grafica dirigida que vamos a graficar. */
@@ -42,6 +53,7 @@ public class GraficadorGrafo<T extends VerticeCoordenado> {
      * Constructor de la clase, asigna atributos.
      * 
      * @param grafo un grafo dirigido.
+     * @param traductor una implementación del traductor para graficar las figuras.
      */
     public GraficadorGrafo(GraficaDirigida<T> grafo, TraductorLenguaje traductor){
         this.grafo = grafo;
@@ -131,8 +143,8 @@ public class GraficadorGrafo<T extends VerticeCoordenado> {
     }
 
     /**
-     * Método para graficar una lista con información de los vértices de un camin
-     * a la derecha del lienzo
+     * Método para graficar una lista con información de los vértices de un camino la derecha del lienzo
+     * @param camino la {@code List<T>} que representa los vertices de la trayectoria usada.
      */
     public void graficaDescripciones(List<T> camino) {
         int tamanioFuente = TAM_FUENTE*2;

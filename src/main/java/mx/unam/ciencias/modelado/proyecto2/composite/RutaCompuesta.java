@@ -111,7 +111,7 @@ public class RutaCompuesta implements Ruta, Serializable{
 
     /**
      * Método que devuelve la lista de estaciones con las que cuenta la ruta compuesta.
-     * @return una List<Estacion>.
+     * @return una {@code List<Estacion>} que representa las estaciones de la ruta..
      */
     @Override public List<Estacion> getEstaciones(){
         return getGrafica().obtenerElementos();
@@ -119,7 +119,7 @@ public class RutaCompuesta implements Ruta, Serializable{
 
     /**
      * Método que devuelve una lista de instancias de Ruta de todo el sistema,
-     * @return una List<Ruta>
+     * @return una {@code List<Ruta>} que representa el conjunto de rutas asociadas a la compuesta.
      */
     public List<Ruta> getRutas(){
         return rutas;
@@ -128,7 +128,7 @@ public class RutaCompuesta implements Ruta, Serializable{
     /**
      * Método que devuelve un diccionario de cadenas asociadas a un color.
      * Esto es necesario para dar datos de simbología en el archivo graficable.
-     * @return un Map<String, ColorHex>
+     * @return un {@code Map<String, ColorHex>}
      */
     @Override public Map<String, ColorHex> getDatosColoracion(){
         Map<String, ColorHex> datosColores = new HashMap<>();

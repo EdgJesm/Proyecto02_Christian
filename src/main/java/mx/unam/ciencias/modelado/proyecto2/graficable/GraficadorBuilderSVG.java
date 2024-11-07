@@ -4,6 +4,13 @@ import mx.unam.ciencias.modelado.proyecto2.edd.GraficaDirigida;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Clase encargada de construir la representación gráfica en formato SVG de un grafo dirigido.
+ * Permite establecer la trayectoria y un diccionario de colores para la visualización del grafo.
+ * Utiliza el patrón Builder para crear una instancia de graficado SVG.
+ * 
+ * @param <T> Tipo de los vértices del grafo, que debe implementar la interfaz VerticeCoordenado.
+ */
 public class GraficadorBuilderSVG<T extends VerticeCoordenado> {
 
     /** Grafo dirigido. */
@@ -37,7 +44,7 @@ public class GraficadorBuilderSVG<T extends VerticeCoordenado> {
         this.trayectoria = trayectoria;
         T primero = trayectoria.get(0);
         T ultimo = trayectoria.get(trayectoria.size() - 1);
-        nombreArchivo = primero.toString() + "-" + ultimo.toString() + ".svg";
+        nombreArchivo = primero.toString() + "-" + ultimo.toString();
 
         return this;
     }
@@ -45,6 +52,7 @@ public class GraficadorBuilderSVG<T extends VerticeCoordenado> {
     /**
      * Configura el diccionario de datosColores para cadenas asociadas a colores.
      * @param datosColores el diccionario de cadenas asociadas a colores.
+     * @return La instancia actual de BuildGraficador para encadenamiento.
      */
     public GraficadorBuilderSVG<T> setDatosColores(Map<String, ColorHex> datosColores) {
         this.datosColores = datosColores;
@@ -82,6 +90,10 @@ public class GraficadorBuilderSVG<T extends VerticeCoordenado> {
         return graficador.toString();
     }
 
+    /**
+     * Getter del nombre del archivo graficable.
+     * @return el atributo nombreArchivo.
+     */
     public String getNombreArchivo(){
         return nombreArchivo;
     }

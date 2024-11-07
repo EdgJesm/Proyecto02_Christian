@@ -5,6 +5,9 @@ import java.util.Scanner;
 /**Clase de getters para las entradas del usuario. */
 public class MetodosGet{
 
+    /**Constructor de la clase. */
+    public MetodosGet(){}
+
     /**
      * Método "getInt" para recibir un entero por el usuario y manejar sus excepciones
      * @param mensaje la cadena para solicitar la entrada

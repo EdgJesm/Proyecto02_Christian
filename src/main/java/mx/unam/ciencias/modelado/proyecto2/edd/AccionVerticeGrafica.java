@@ -2,6 +2,8 @@ package mx.unam.ciencias.modelado.proyecto2.edd;
 
 /**
  * Interfaz para realizar acciones sobre vértices de gráficas.
+ * 
+ *  @param <T> el tipo de los elementos almacenados en los vértices de la gráfica.
  */
 @FunctionalInterface
 public interface AccionVerticeGrafica<T> {
