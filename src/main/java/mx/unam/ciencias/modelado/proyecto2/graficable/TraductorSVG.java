@@ -21,8 +21,9 @@ public class TraductorSVG implements TraductorLenguaje {
      * @return una cadena que inicia el archivo SVG.
      */
     @Override public String start(double ancho, double alto) {
-        return String.format("<?xml version='1.0' encoding='UTF-8' ?>\n<svg width='%f' height='%f'>\n <g>\n", ancho, alto);
+        return String.format("<?xml version='1.0' encoding='UTF-8' ?>\n<svg xmlns='http://www.w3.org/2000/svg' width='%f' height='%f'>\n <g>\n", ancho, alto);
     }
+
 
     /** Cierra el archivo, termina de hacer cambios.
      * @return una cadena que cierra el archivo SVG.

@@ -2,6 +2,7 @@ package mx.unam.ciencias.modelado.proyecto2.factory.fabricarutas;
 
 import mx.unam.ciencias.modelado.proyecto2.graficable.VerticeCoordenado;
 import mx.unam.ciencias.modelado.proyecto2.graficable.ColorHex;
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
@@ -9,12 +10,20 @@ import java.util.Objects;
  * Cada estación tiene coordenadas en un plano, una afluencia, un color
  * representativo y una descripción breve.
  */
-public class Estacion implements VerticeCoordenado {
+public class Estacion implements VerticeCoordenado, Serializable {
 
+    /**Para objetos serializables. */
+    private static final long serialVersionUID = 1L;
+
+    /**La coordenadaX. */
     private double coordX;
+    /**La coodenada Y. */
     private double coordY;
+    /**La afluencia de la estación. */
     private double afluencia;
+    /**El color del vértice. */
     private ColorHex colorVertice;
+    /**Una descripción de la estación.  */
     private String descripcion;
 
     /**
@@ -112,6 +121,6 @@ public class Estacion implements VerticeCoordenado {
     }
 
     @Override public String toString(){
-        return descripcion + ", " + coordX +", " + coordY + ", " + colorVertice.getCodigoColor();
+        return getDescripcion();
     }
 }

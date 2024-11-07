@@ -6,8 +6,11 @@ import mx.unam.ciencias.modelado.proyecto2.strategy.*;
 import mx.unam.ciencias.modelado.proyecto2.composite.*;
 import mx.unam.ciencias.modelado.proyecto2.factory.fabricarutas.*;
 import mx.unam.ciencias.modelado.proyecto2.factory.rutas.*;
+import mx.unam.ciencias.modelado.proyecto2.menus.*;
+
 //import mx.unam.ciencias.modelado.proyecto2.edd.GraficaDirigida;
-import java.util.List;
+import java.util.*;
+
 
 public class Prueba{
 
@@ -32,35 +35,44 @@ public class Prueba{
 
         System.err.println("Rutas cargadas");
 
-        sistema.agrega(r1.getGrafica());
-        sistema.agrega(r2.getGrafica());
-        sistema.agrega(r3.getGrafica());
-        sistema.agrega(r4.getGrafica());
-        sistema.agrega(r5.getGrafica());
-        sistema.agrega(r6.getGrafica());
-        sistema.agrega(r7.getGrafica());
-        sistema.agrega(r8.getGrafica());
-        sistema.agrega(r9.getGrafica());
-        sistema.agrega(r10.getGrafica());
-        sistema.agrega(r11.getGrafica());
-        sistema.agrega(r12.getGrafica());
+        sistema.agrega(r1);
+        sistema.agrega(r2);
+        sistema.agrega(r3);
+        sistema.agrega(r4);
+        sistema.agrega(r5);
+        sistema.agrega(r6);
+        sistema.agrega(r7);
+        sistema.agrega(r8);
+        sistema.agrega(r9);
+        sistema.agrega(r10);
+        sistema.agrega(r11);
+        sistema.agrega(r12);
         System.err.println("Rutas agregadas.");
+
+        List<RutaOptima> criteriosOptimos = List.of(new MenorAfluencia(), new MenorNumeroDeParadas());
+
+
+        // Inicializa el menú
+        Menu.launchMenu(sistema, criteriosOptimos);
 
 
         Estacion origen = new Estacion(7.7, 5.9, 24.0, ColorHex.NEGRO, "BaseMetroCU");
         Estacion origen2 = new Estacion(7.3, 7.8, 17.0, ColorHex.NEGRO, "TVUNAM");
         Estacion origen3 = new Estacion(5.7, 9.2, 17.0, ColorHex.NEGRO, "Universum");
+
         Estacion destino = new Estacion(7.3, 6.9, 17.0, ColorHex.NEGRO, "TiendaUNAM1");
         Estacion destino2 = new Estacion(5.3, 6.1, 17.0, ColorHex.NEGRO, "DGTIC");
         Estacion destino3 = new Estacion(6.2, 3.0, 17.0, ColorHex.NEGRO, "FacultadMedicina");
         Estacion destino4 = new Estacion(2.4, 1.8, 17.0, ColorHex.NEGRO, "AAPAUNAM");
+        Estacion destino5 = new Estacion(4.3, 2.4, 17.0, ColorHex.NEGRO, "Psicologia");
 
+        /*
         System.err.println("Trayectoria establecida.");
         
-        RutaOptima criterio = new MenorNumeroDeParadas();
+        RutaOptima criterio = new MenorAfluencia();
         System.err.println("Criterio establecido.");
 
-        List<Estacion> trayectoria = sistema.buscaRuta(origen3, destino4, criterio);
+        List<Estacion> trayectoria = sistema.buscaRuta(origen, destino5, criterio);
         System.err.println("Trayectoria encontrada.");
 
         GraficadorBuilderSVG<Estacion> graficador = new GraficadorBuilderSVG<>(sistema.getGrafica());
@@ -71,6 +83,7 @@ public class Prueba{
         System.out.println(graficador.graficar());
 
         System.err.println("lol??");
+        */
 
 
     }

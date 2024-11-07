@@ -1,12 +1,15 @@
 package mx.unam.ciencias.modelado.proyecto2.edd;
 
 import java.util.*;
+import java.io.Serializable;
 
 /**
  * Clase para gráficas. Una gráfica es un conjunto de vértices y aristas, tales
  * que las aristas son un subconjunto del producto cruz de los vértices.
  */
-public class Grafica<T> implements Coleccion<T> {
+public class Grafica<T> implements Serializable, Coleccion<T> {
+    /**Para objetos serializables. */
+    private static final long serialVersionUID = 1L;
 
     /* Clase interna privada para iteradores. */
     private class Iterador implements Iterator<T> {
@@ -34,7 +37,10 @@ public class Grafica<T> implements Coleccion<T> {
     }
 
     /* Clase interna privada para vértices. */
-    private class Vertice implements VerticeGrafica<T>, Comparable<Vertice> {
+    private class Vertice implements Serializable, VerticeGrafica<T>, Comparable<Vertice> {
+
+        /**Para objetos serializables. */
+        private static final long serialVersionUID = 1L;
 
         /* El elemento del vértice. */
         private T elemento;
@@ -90,8 +96,11 @@ public class Grafica<T> implements Coleccion<T> {
     }
 
     /* Clase interna privada para vértices vecinos. */
-    private class Vecino implements VerticeGrafica<T> {
+    private class Vecino implements Serializable, VerticeGrafica<T> {
 
+        /**Para objetos serializables. */
+        private static final long serialVersionUID = 1L;
+        
         /* El vértice vecino. */
         public Vertice vecino;
         /* El peso de la arista conectando al vértice con su vértice vecino. */
