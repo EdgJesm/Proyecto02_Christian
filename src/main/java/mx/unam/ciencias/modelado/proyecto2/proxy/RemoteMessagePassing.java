@@ -54,7 +54,7 @@ public class RemoteMessagePassing<T extends Serializable> {
      * Se recibe el objeto a traves del ObjectInputStream in.
      * @return El objeto leido de in.
      */
-    public T receive() {
+    @SuppressWarnings("unchecked") public T receive() {
         T value = null;
         //synchronized(receiving){
         try{

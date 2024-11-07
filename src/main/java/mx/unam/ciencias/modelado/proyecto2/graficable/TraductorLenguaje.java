@@ -68,6 +68,28 @@ public interface TraductorLenguaje {
     public String dibujaTexto(double x, double y, String texto, int tamFuente, ColorHex colorTexto);
 
     /**
+     * Dibuja un texto en el lienzo en la posición especificada [alineado a la izquierda].
+     *
+     * @param x la coordenada x del punto de inicio del texto.
+     * @param y la coordenada y del punto de inicio del texto.
+     * @param texto el contenido del texto que se mostrará en el lienzo.
+     * @param tamFuente el tamaño de la fuente del texto.
+     * @param colorTexto el color del texto, especificado mediante una instancia de ColorHex.
+     */
+    public String dibujaTextoIzquierda(double x, double y, String texto, int tamFuente, ColorHex colorTexto);
+
+    /**
+     * Dibuja un texto en el lienzo en la posición especificada [alineado a la derecha].
+     *
+     * @param x la coordenada x del punto de inicio del texto.
+     * @param y la coordenada y del punto de inicio del texto.
+     * @param texto el contenido del texto que se mostrará en el lienzo.
+     * @param tamFuente el tamaño de la fuente del texto.
+     * @param colorTexto el color del texto, especificado mediante una instancia de ColorHex.
+     */
+    public String dibujaTextoDerecha(double x, double y, String texto, int tamFuente, ColorHex colorTexto);
+
+    /**
      * Aplica un color de fondo al lienzo.
      *
      * @param color el color de fondo del lienzo, especificado mediante una instancia de ColorHex.

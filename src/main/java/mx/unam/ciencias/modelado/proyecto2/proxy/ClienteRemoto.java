@@ -54,13 +54,15 @@ public class ClienteRemoto {
             
             // Recibe el objeto que contiene los criterios de optimización
             Object receivedObject = remote.receive();  // Recibe el objeto como Object
-
+            
+            
             // Verificar si el objeto recibido es una lista
             if (receivedObject instanceof List<?>) {
                 List<?> list = (List<?>) receivedObject;
                 
                 // Verificar que los elementos de la lista sean de tipo RutaOptima
                 if (list.isEmpty() || list.get(0) instanceof RutaOptima) {
+                    @SuppressWarnings("unchecked")
                     List<RutaOptima> criteriosOptimizacion = (List<RutaOptima>) list;  // Cast seguro
                     // Lanza el menú con los datos recibidos
                     Menu.launchMenu(sistemaCompleto, criteriosOptimizacion);

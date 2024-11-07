@@ -136,12 +136,12 @@ public class GraficadorGrafo<T extends VerticeCoordenado> {
      */
     public void graficaDescripciones(List<T> camino) {
         int tamanioFuente = TAM_FUENTE*2;
-        double posicionX = maxCoordX + 30; // Margen a la derecha del lienzo
+        double posicionX = anchoLienzo-10; // Margen a la derecha del lienzo
         double posicionY = 10; // Inicia en la parte superior
 
         for (T vertice : camino) {
             posicionY += TAM_FUENTE + 15; // Espaciado vertical entre descripciones
-            sb.append(traductor.dibujaTexto(posicionX, posicionY, vertice.getDescripcion(), tamanioFuente, vertice.getColorVertice()));
+            sb.append(traductor.dibujaTextoDerecha(posicionX, posicionY, vertice.getDescripcion(), tamanioFuente, vertice.getColorVertice()));
         }
     }
 
@@ -151,7 +151,7 @@ public class GraficadorGrafo<T extends VerticeCoordenado> {
      */
     public void graficaTextoColores(Map<String, ColorHex> datos) {
         int tamanioFuente = TAM_FUENTE*3;
-        double posicionX = tamanioFuente+50;
+        double posicionX = 10;
         double posicionY = maxCoordY;
 
         // Obtener las claves (nombres de ruta) y ordenarlas alfabéticamente
@@ -163,7 +163,7 @@ public class GraficadorGrafo<T extends VerticeCoordenado> {
             ColorHex colorRuta = datos.get(nombreRuta);
 
             // Dibuja el texto con el nombre de la ruta y su color
-            sb.append(traductor.dibujaTexto(posicionX, posicionY, nombreRuta, tamanioFuente, colorRuta));
+            sb.append(traductor.dibujaTextoIzquierda(posicionX, posicionY, nombreRuta, tamanioFuente, colorRuta));
 
             // Incrementa la posición Y para la siguiente línea de texto
             posicionY -= tamanioFuente + 10; // Separa los elementos de la lista

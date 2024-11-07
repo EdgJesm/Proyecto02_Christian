@@ -22,7 +22,7 @@ public class RutaCompuesta implements Ruta, Serializable{
     /**Lista de todas las rutas que se agreguen. */
     private List<Ruta> rutas;
     /**Nombre de la ruta compuesta. */
-    private final String NOMBRE = "---Pumabus sistema completo---";
+    private final String NOMBRE = "Sistema completo";
     /**Color de la ruta (incluso si no contamos con un color concreto al ser compuesta) */
     private final ColorHex COLOR = ColorHex.NEGRO;
 
