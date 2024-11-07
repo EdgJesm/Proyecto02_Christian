@@ -2,6 +2,7 @@ package mx.unam.ciencias.modelado.proyecto2.graficable;
 
 /**Enumeración para los colores en su valor hexadecimal. */
 public enum ColorHex {
+    
     /**Color: rojo. */
     ROJO("#FF0000"),
     /**Color: verde. */

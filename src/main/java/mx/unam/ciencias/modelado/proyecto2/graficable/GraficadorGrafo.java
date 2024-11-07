@@ -8,7 +8,7 @@ public class GraficadorGrafo<T extends VerticeCoordenado> {
     /** La grafica dirigida que vamos a graficar. */
     private GraficaDirigida<T> grafo; 
     /** Ancho del lienzo. */
-    private double anchoLienzo = 200;
+    private double anchoLienzo = 250;
     /** Alto del lienzo. */
     private double altoLienzo = 20;
     /**Maxima coordenada X. */
@@ -135,12 +135,38 @@ public class GraficadorGrafo<T extends VerticeCoordenado> {
      * a la derecha del lienzo
      */
     public void graficaDescripciones(List<T> camino) {
+        int tamanioFuente = TAM_FUENTE*2;
         double posicionX = maxCoordX + 30; // Margen a la derecha del lienzo
         double posicionY = 10; // Inicia en la parte superior
 
         for (T vertice : camino) {
-            posicionY += TAM_FUENTE + 5; // Espaciado vertical entre descripciones
-            sb.append(traductor.dibujaTexto(posicionX, posicionY, vertice.getDescripcion(), TAM_FUENTE, vertice.getColorVertice()));
+            posicionY += TAM_FUENTE + 15; // Espaciado vertical entre descripciones
+            sb.append(traductor.dibujaTexto(posicionX, posicionY, vertice.getDescripcion(), tamanioFuente, vertice.getColorVertice()));
+        }
+    }
+
+    /**
+     * Método que grafica un diccionario de cadenas asociadas a colores.
+     * @param datos un diccionario de cadenas y colores.
+     */
+    public void graficaTextoColores(Map<String, ColorHex> datos) {
+        int tamanioFuente = TAM_FUENTE*3;
+        double posicionX = tamanioFuente+50;
+        double posicionY = maxCoordY;
+
+        // Obtener las claves (nombres de ruta) y ordenarlas alfabéticamente
+        List<String> clavesOrdenadas = new ArrayList<>(datos.keySet());
+        Collections.sort(clavesOrdenadas);
+
+        // Iterar sobre las claves ordenadas
+        for (String nombreRuta : clavesOrdenadas) {
+            ColorHex colorRuta = datos.get(nombreRuta);
+
+            // Dibuja el texto con el nombre de la ruta y su color
+            sb.append(traductor.dibujaTexto(posicionX, posicionY, nombreRuta, tamanioFuente, colorRuta));
+
+            // Incrementa la posición Y para la siguiente línea de texto
+            posicionY -= tamanioFuente + 10; // Separa los elementos de la lista
         }
     }
 

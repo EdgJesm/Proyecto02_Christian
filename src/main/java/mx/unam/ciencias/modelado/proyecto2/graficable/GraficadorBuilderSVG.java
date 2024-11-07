@@ -2,6 +2,7 @@ package mx.unam.ciencias.modelado.proyecto2.graficable;
 
 import mx.unam.ciencias.modelado.proyecto2.edd.GraficaDirigida;
 import java.util.List;
+import java.util.Map;
 
 public class GraficadorBuilderSVG<T extends VerticeCoordenado> {
 
@@ -9,6 +10,8 @@ public class GraficadorBuilderSVG<T extends VerticeCoordenado> {
     private GraficaDirigida<T> grafo;
     /** Trayectoria a resaltar en el grafo. */
     private List<T> trayectoria;
+    /** Diccionario de cadenas asociadas a colores. */
+    private Map<String, ColorHex> datosColores;
     /** Graficador de gráficos */
     private GraficadorGrafo<T> graficador;
     /** Nombre predeterminado de los archivos */
@@ -40,6 +43,16 @@ public class GraficadorBuilderSVG<T extends VerticeCoordenado> {
     }
 
     /**
+     * Configura el diccionario de datosColores para cadenas asociadas a colores.
+     * @param datosColores el diccionario de cadenas asociadas a colores.
+     */
+    public GraficadorBuilderSVG<T> setDatosColores(Map<String, ColorHex> datosColores) {
+        this.datosColores = datosColores;
+        return this;
+    }
+
+
+    /**
      * Genera la representación gráfica en formato SVG.
      * 
      * @return La cadena SVG que representa el grafo con la trayectoria, si se configuró.
@@ -56,8 +69,10 @@ public class GraficadorBuilderSVG<T extends VerticeCoordenado> {
         if (trayectoria != null && !trayectoria.isEmpty()) {
             graficador.graficaCamino(trayectoria);
             graficador.graficaDescripciones(trayectoria);
-        } else{
-            System.err.println("No hay trayectoria");
+        }
+
+        if(datosColores != null && !datosColores.isEmpty()){
+            graficador.graficaTextoColores(datosColores);
         }
 
         //Al ultimo los vértices

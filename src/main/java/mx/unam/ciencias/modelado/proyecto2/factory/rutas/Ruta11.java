@@ -9,7 +9,8 @@ import java.util.List;
 */
 public class Ruta11 extends FabricaRuta {
 
-    private final String NOMBRE = "Ruta 11";
+    private static final String NOMBRE = "Ruta 11";
+    private static final ColorHex COLOR = ColorHex.RUTA11;
 
     public Ruta11(List<String> lineas){
         super(lineas);
@@ -42,10 +43,8 @@ public class Ruta11 extends FabricaRuta {
             throw new IllegalArgumentException("Formato de número inválido: " + e.getMessage());
         }
 
-        ColorHex colorVertice = ColorHex.RUTA11;
-
         // Retornar una nueva instancia de Estacion
-        return new Estacion(coordX, coordY, afluencia, colorVertice, nombre);
+        return new Estacion(coordX, coordY, afluencia, this.getColoracion(), nombre);
     }
 
     /**
@@ -54,4 +53,11 @@ public class Ruta11 extends FabricaRuta {
      */
     @Override
     public String getNombre(){return this.NOMBRE;}
+
+    /**
+     * Getter para el color de la ruta.
+     * @return ColorHex de la ruta.
+     */
+    @Override 
+    public ColorHex getColoracion(){return this.COLOR;}
 }

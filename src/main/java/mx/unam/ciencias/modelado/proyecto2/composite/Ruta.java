@@ -2,8 +2,10 @@ package mx.unam.ciencias.modelado.proyecto2.composite;
 
 import mx.unam.ciencias.modelado.proyecto2.factory.fabricarutas.Estacion;
 import mx.unam.ciencias.modelado.proyecto2.edd.GraficaDirigida;
+import mx.unam.ciencias.modelado.proyecto2.graficable.ColorHex;
 import mx.unam.ciencias.modelado.proyecto2.strategy.RutaOptima;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Interfaz para las implementaciones de los componentes del patrón composite.
@@ -43,4 +45,18 @@ public interface Ruta{
      * @return una cadena con el nombr especifico de la ruta.
      */
     public String getNombre();
+
+    /**
+     * Método que devuelve un diccionario de cadenas asociadas a un color.
+     * Esto es necesario para dar datos de simbología en el archivo graficable.
+     * @return un Map<String, ColorHex>
+     */
+    public Map<String, ColorHex> getDatosColoracion();
+
+    /**
+     * Método para obtener la coloración de una ruta.
+     * @return una instancia de ColorHex.
+     */
+    public ColorHex getColoracion();
+
 }

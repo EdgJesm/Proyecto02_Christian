@@ -1,8 +1,8 @@
 package mx.unam.ciencias.modelado.proyecto2.factory.fabricarutas;
 
 import mx.unam.ciencias.modelado.proyecto2.edd.GraficaDirigida;
-import mx.unam.ciencias.modelado.proyecto2.graficable.VerticeCoordenado;
 import mx.unam.ciencias.modelado.proyecto2.strategy.RutaOptima;
+import mx.unam.ciencias.modelado.proyecto2.graficable.ColorHex;
 import mx.unam.ciencias.modelado.proyecto2.composite.Ruta;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,6 +19,7 @@ public abstract class FabricaRuta implements Ruta, Serializable{
     /**Para objetos serializables. */
     private static final long serialVersionUID = 1L;
     
+    /**Grafica dirigida que corresponde a la ruta completa. */
     private GraficaDirigida<Estacion> ruta;
 
     /**
@@ -43,6 +44,11 @@ public abstract class FabricaRuta implements Ruta, Serializable{
         for (String linea : lineas) {
             String[] datos = linea.split(",");
             Estacion estacion = fabricaEstacion(datos);
+
+            if(estacion.getColorVertice() == null){
+                System.err.println("No tiene color: " + getNombre() + " - " + estacion);
+            }
+
             if(!graficaDirigida.contiene(estacion)){
                 graficaDirigida.agrega(estacion);
             }
@@ -80,8 +86,34 @@ public abstract class FabricaRuta implements Ruta, Serializable{
         return ruta.obtenerElementos();
     }
 
+    /**
+     * Método que devuelve un diccionario de cadenas asociadas a un color.
+     * Esto es necesario para dar datos de simbología en el archivo graficable.
+     * @return un Map<String, ColorHex>
+     */
+    @Override public Map<String, ColorHex> getDatosColoracion(){
+        Map<String, ColorHex> datosColores = new HashMap<>();
+        datosColores.put(getNombre(), getColoracion());
+        return datosColores;
+    }
+
     @Override public String toString(){
         return getNombre();
+    }
+
+    /**
+     * Implementación del método equals, para comparar rutas.
+     * @param obj un objeto cualquiera.
+     * @return si son "iguales" obj y la clase actual.
+     */
+    @Override public boolean equals(Object obj) {
+        if (this == obj) return true; // Compara referencias
+        if (obj == null || getClass() != obj.getClass()) return false; // Compara tipos
+
+        Ruta that = (Ruta) obj;
+
+        // Compara un atributo.
+        return this.getNombre().equals(that.getNombre());
     }
 
     /**
@@ -97,6 +129,11 @@ public abstract class FabricaRuta implements Ruta, Serializable{
      * @return String NOMBRE nombre de la ruta.
      */
     public abstract String getNombre();
+    /**
+     * Método abstracto que nos petmitirá obtener la coloración de la ruta.
+     * @return una instancia de ColorHex.
+     */
+    @Override public abstract ColorHex getColoracion();
     /**
      * Método abstracto que creará una Estacion a partir de un arreglo de cadenas.
      * @param datos un arreglo de cadenas que pueda ser empleado para crear un objeto.
