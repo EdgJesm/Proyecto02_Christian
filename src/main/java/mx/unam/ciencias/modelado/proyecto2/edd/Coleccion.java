@@ -9,6 +9,8 @@ package mx.unam.ciencias.modelado.proyecto2.edd;
  * <p>Las colecciones no aceptan a <code>null</code> como elemento; el
  * comportamiento de las clases que implementen esta interfaz no está definido
  * si <code>null</code> es pasado como parámetro a ninguno de sus métodos.</p>
+ * 
+ * @param <T> el tipo de los elementos en la colección.
  */
 public interface Coleccion<T> extends Iterable<T> {
 

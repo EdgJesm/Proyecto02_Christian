@@ -14,6 +14,9 @@ import java.util.LinkedList;
  */
 public class ReaderWriter {
 
+    /**Constructor vacío. */
+    public ReaderWriter(){}
+
     /**
      * Método para leer los renglones de un archivo completo.
      * @param fileName el nombre del archivo a leer.

@@ -78,7 +78,7 @@ public class Servidor implements Serializable, PumabusService{
 
     /**
      * Implementación del método para obtener los criterios de optimización.
-     * @return una List<RutaOptima> con los criterios de optimización disponibles.
+     * @return una List{@code <RutaOptima>} con los criterios de optimización disponibles.
      */
     @Override public List<RutaOptima> getCriteriosOptimizacion(){
         return criteriosOptimizacion;

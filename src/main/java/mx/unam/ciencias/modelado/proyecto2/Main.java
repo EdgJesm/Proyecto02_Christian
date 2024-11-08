@@ -1,6 +1,5 @@
 package mx.unam.ciencias.modelado.proyecto2;
 
-import mx.unam.ciencias.modelado.proyecto2.simulaciones.Prueba;
 import mx.unam.ciencias.modelado.proyecto2.proxy.ClienteRemoto;
 
 
@@ -12,11 +11,13 @@ import mx.unam.ciencias.modelado.proyecto2.proxy.ClienteRemoto;
  */
 public class Main {
 
-  /**
-   * Metodo main que ejecuta el cliente o el servidor dependiendo de la entrada de argumentos
-   * server como argumento inicia el servidor
-   * client como argumento inicia el cliente
-   */
+    /**Constructor de la clase. */
+    public Main(){}
+
+    /**
+     * Método main para usar el programa como usuario.
+     * @param args un arreglo de argumentos.
+     */
     public static void main(String[] args) {
         ClienteRemoto.iniciarCliente();
     }

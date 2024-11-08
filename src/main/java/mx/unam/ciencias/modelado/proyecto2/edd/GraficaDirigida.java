@@ -6,6 +6,8 @@ import java.io.Serializable;
 /**
  * Clase para gráficas. Una gráfica es un conjunto de vértices y aristas, tales
  * que las aristas son un subconjunto del producto cruz de los vértices.
+ * 
+ * @param <T> el tipo de los elementos que almacenarán los vértices de la gráfica.
  */
 public class GraficaDirigida<T> implements Serializable, Coleccion<T> {
 
@@ -156,9 +158,9 @@ public class GraficaDirigida<T> implements Serializable, Coleccion<T> {
         public boolean seSiguen(GraficaDirigida<T>.Vertice v, GraficaDirigida<T>.Vecino a);
     }
 
-    /* Vértices. */
+    /** Vértices. */
     private Map<T, Vertice> vertices;
-    /* Número de aristas. */
+    /** Numero de aristas. */
     private int aristas;
 
     /**
@@ -576,6 +578,7 @@ public class GraficaDirigida<T> implements Serializable, Coleccion<T> {
      * @param elemento el elemento sobre cuyo vértice queremos comenzar el
      *        recorrido.
      * @param accion la acción a realizar.
+     * @return Un valor entero que representa el numero de vertices que se recorrieron.
      * @throws NoSuchElementException si el elemento no está en la gráfica.
      */
     public int dfsInt(T elemento, AccionVerticeGrafica<T> accion) {

@@ -66,9 +66,9 @@ public class TraductorSVG implements TraductorLenguaje {
      * Método encargado de generar un texto en el lienzo.
      * @param x la coordenada x.
      * @param y la coordenada y.
+     * @param texto la cadena a escribir.
      * @param tamFuente el tamaño de la fuente.
-     * @param color el color del texto.
-     * @param texto el texto a escribir en el lienzo.
+     * @param colorTexto el texto a escribir en el lienzo.
      * @return una cadena SVG que representa el texto.
      */
     @Override public String dibujaTexto(double x, double y, String texto, int tamFuente, ColorHex colorTexto) {

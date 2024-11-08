@@ -4,14 +4,22 @@ import mx.unam.ciencias.modelado.proyecto2.factory.fabricarutas.*;
 import mx.unam.ciencias.modelado.proyecto2.graficable.ColorHex;
 import java.util.List;
 
-/*
-* Clase para crear nuestra Ruta 1
-*/
+/**
+ * Clase que representa la ruta 1 en el contexto de la fábrica de rutas.
+ * Esta clase extiende la clase {@link FabricaRuta} y proporciona implementación
+ * específica para la creación de las estaciones de la ruta 1.
+ */
 public class Ruta1 extends FabricaRuta {
 
+    /**Nombre de la ruta. */
     private static final String NOMBRE = "Ruta 1";
+    /**Coloración asociada a la ruta. */
     private static final ColorHex COLOR = ColorHex.RUTA1;
 
+    /**
+     * Constructor de la clase, recibe las lineas para construir la grafica.
+     * @param lineas una {@code List<String>} para armar la grafica con el constructor de la clase super.
+     */
     public Ruta1(List<String> lineas){
         super(lineas);
     }

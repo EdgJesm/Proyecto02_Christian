@@ -43,7 +43,7 @@ public class Menu extends Application {
         /**Variable estatica que será un valor momentaneo para la lista de rutas otpimas.. */
     private static List<RutaOptima> inicialRutasOptimas;
 
-    // Constructor vacío para JavaFX
+    /**Constructor de la clase. */
     public Menu() {}
 
     /**
@@ -89,7 +89,10 @@ public class Menu extends Application {
 
             ComboBox<RutaOptima> comboRutasOptimas = new ComboBox<>();
             comboRutasOptimas.getItems().addAll(rutasOptimas);
-            comboRutasOptimas.setPromptText("Seleccione el tipo de trayecto.");
+            // los deshabilitamos de inicio
+            comboEstacionOrigen.setDisable(true);
+            comboEstacionDestino.setDisable(true);
+            comboRutasOptimas.setDisable(true);
 
             comboRutas.setOnAction(e -> {
                 Ruta rutaSeleccionada = comboRutas.getValue();
@@ -98,8 +101,18 @@ public class Menu extends Application {
                     comboEstacionOrigen.getItems().setAll(estaciones);
                     comboEstacionOrigen.setPromptText("Seleccione origen.");
                     comboEstacionDestino.getItems().setAll(estaciones);
-                    comboEstacionDestino.setPromptText("Seleccione destino.");
+                    comboEstacionOrigen.setDisable(false) ;
+                    comboEstacionDestino.setDisable(true);
+                    comboRutasOptimas.setDisable(true);
                 }
+            });
+            comboEstacionOrigen.setOnAction(e -> {
+              if(comboEstacionOrigen.getValue() != null)
+                  comboEstacionDestino.setDisable(false);
+            });
+            comboEstacionDestino.setOnAction(e -> {
+              if(comboEstacionDestino.getValue() != null)
+                  comboRutasOptimas.setDisable(false);
             });
 
             Button button = new Button("Buscar Ruta");
@@ -140,7 +153,7 @@ public class Menu extends Application {
 
             imageView.setOnScroll(event -> {
                 double delta = event.getDeltaY(); // Detecta el movimiento de la rueda del mouse o el gesto del mousepad.
-                
+
                 // Si el gesto es hacia arriba (hacia afuera), hacemos zoom in, si es hacia abajo (hacia adentro), zoom out
                 if (delta > 0) {
                     imageView.setFitWidth(imageView.getFitWidth() * 1.1); // Aumentar tamaño
@@ -202,11 +215,11 @@ public class Menu extends Application {
         graficador.setDatosColores(ruta.getDatosColoracion());
 
         // Guardamos el archivo SVG temporalmente
-        String svgFilePath = graficador.getNombreArchivo();
+        String svgFilePath = graficador.getNombreArchivo() + ".svg";
         ReaderWriter.writeOverwrite(graficador.graficar(), svgFilePath);
 
         // Convertimos el SVG a PNG
-        String pngFilePath = graficador.getNombreArchivo().replace(".svg",".png");
+        String pngFilePath = graficador.getNombreArchivo() + ".png";
         convertirSVGaPNG(svgFilePath, pngFilePath);
 
         // Devuelve la ruta del archivo PNG generado
