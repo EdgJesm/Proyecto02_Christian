@@ -82,19 +82,23 @@ public class Menu extends Application {
             // Crear ComboBoxes
             ComboBox<Ruta> comboRutas = new ComboBox<>();
             comboRutas.getItems().addAll(rutaCompuesta.getRutas());
+            comboRutas.setPromptText("Seleccione ruta.");
 
             ComboBox<Estacion> comboEstacionOrigen = new ComboBox<>();
             ComboBox<Estacion> comboEstacionDestino = new ComboBox<>();
 
             ComboBox<RutaOptima> comboRutasOptimas = new ComboBox<>();
             comboRutasOptimas.getItems().addAll(rutasOptimas);
+            comboRutasOptimas.setPromptText("Seleccione el tipo de trayecto.");
 
             comboRutas.setOnAction(e -> {
                 Ruta rutaSeleccionada = comboRutas.getValue();
                 if (rutaSeleccionada != null) {
                     List<Estacion> estaciones = rutaSeleccionada.getEstaciones();
                     comboEstacionOrigen.getItems().setAll(estaciones);
+                    comboEstacionOrigen.setPromptText("Seleccione origen.");
                     comboEstacionDestino.getItems().setAll(estaciones);
+                    comboEstacionDestino.setPromptText("Seleccione destino.");
                 }
             });
 
