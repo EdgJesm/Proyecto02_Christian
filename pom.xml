@@ -76,7 +76,7 @@
       <plugin>
         <groupId>org.openjfx</groupId>
         <artifactId>javafx-maven-plugin</artifactId>
-        <version>0.0.5</version> <!-- O la versión más reciente -->
+        <version>0.0.8</version> <!-- O la versión más reciente -->
         <configuration>
           <mainClass>mx.unam.ciencias.modelado.proyecto2.Main</mainClass>
           <addModules>javafx.controls,javafx.fxml</addModules>

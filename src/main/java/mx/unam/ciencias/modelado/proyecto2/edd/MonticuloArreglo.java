@@ -4,6 +4,9 @@ import java.util.NoSuchElementException;
 
 /**
  * Clase para montículos de Dijkstra con arreglos.
+ * 
+ * @param <T> el tipo de los elementos que se almacenan en el montículo, los cuales
+ *            deben ser comparables entre sí.
  */
 public class MonticuloArreglo<T extends Comparable<T>>
     implements MonticuloDijkstra<T> {

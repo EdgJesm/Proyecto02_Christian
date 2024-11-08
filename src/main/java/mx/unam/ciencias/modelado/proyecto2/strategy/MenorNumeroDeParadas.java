@@ -6,31 +6,43 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Implementacion de una de las estrategias para las rutas optimas.
- * En este caso se trata de la ruta con el minimo numero de paradas entre estaciones.
+ * Implementación de una estrategia para las rutas óptimas.
+ * Esta estrategia calcula la ruta con el mínimo número de paradas entre estaciones.
  */
-public class MenorNumeroDeParadas implements RutaOptima, Serializable{
+public class MenorNumeroDeParadas implements RutaOptima, Serializable {
 
-    /**Para objetos serializables. */
+    /** Para objetos serializables. */
     private static final long serialVersionUID = 1L;
 
     /**
-     * Método principal de la interfaz, calculará una trayectoria de estaciones dado un grafo dirigido y los vértices origen y destino.
-     * El criterio de optimización será minimizar las paradas que hará el autobus.
-     * @param origen la estacion origen.
-     * @param destino la estacion destino.
-     * @return una lista que supone una trayectoria del origen al destino.
+     * Constructor por defecto de la clase {@code MenorNumeroDeParadas}.
      */
-    public List<Estacion> calculaRuta(GraficaDirigida<Estacion> grafo, Estacion origen, Estacion destino){
+    public MenorNumeroDeParadas() {}
+
+    /**
+     * Método principal de la interfaz {@code RutaOptima}. Calcula una trayectoria de estaciones
+     * desde una estación de origen hasta una estación de destino, minimizando el número de paradas
+     * que hará el autobús.
+     * 
+     * <p>Este método utiliza un algoritmo basado en el cálculo de la trayectoria mínima de elementos
+     * en un grafo dirigido, representado por las estaciones.</p>
+     * 
+     * @param grafo el grafo dirigido que contiene las estaciones y sus conexiones.
+     * @param origen la estación de origen desde donde comienza la ruta.
+     * @param destino la estación de destino a la que se desea llegar.
+     * @return una lista de estaciones que representa la trayectoria del origen al destino, con el menor número de paradas.
+     */
+    public List<Estacion> calculaRuta(GraficaDirigida<Estacion> grafo, Estacion origen, Estacion destino) {
         return grafo.trayectoriaMinimaElementos(origen, destino);
     }
 
     /**
-     * Método toString, se hizo para practicidad con javaFX.
-     * @return la cadena "Menor número de paradas"
+     * Método {@code toString} que devuelve una representación en cadena de la estrategia.
+     * 
+     * @return la cadena "Menor número de paradas" que representa la estrategia utilizada.
      */
-    @Override public String toString(){
+    @Override
+    public String toString() {
         return "Menor número de paradas";
     }
-
 }

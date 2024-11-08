@@ -66,13 +66,41 @@ public class TraductorSVG implements TraductorLenguaje {
      * Método encargado de generar un texto en el lienzo.
      * @param x la coordenada x.
      * @param y la coordenada y.
+     * @param texto la cadena a escribir.
      * @param tamFuente el tamaño de la fuente.
-     * @param color el color del texto.
-     * @param texto el texto a escribir en el lienzo.
+     * @param colorTexto el texto a escribir en el lienzo.
      * @return una cadena SVG que representa el texto.
      */
     @Override public String dibujaTexto(double x, double y, String texto, int tamFuente, ColorHex colorTexto) {
         return String.format("    <text fill='%s' font-family='sans-serif' font-size='%d' font-weight='bold' x='%f' y='%f' text-anchor='middle'>%s</text>\n",
+                             colorTexto.getCodigoColor(), tamFuente, x, y, texto);
+    }
+
+    /**
+     * Dibuja un texto en el lienzo en la posición especificada [alineado a la izquierda].
+     *
+     * @param x la coordenada x del punto de inicio del texto.
+     * @param y la coordenada y del punto de inicio del texto.
+     * @param texto el contenido del texto que se mostrará en el lienzo.
+     * @param tamFuente el tamaño de la fuente del texto.
+     * @param colorTexto el color del texto, especificado mediante una instancia de ColorHex.
+     */
+    @Override public String dibujaTextoIzquierda(double x, double y, String texto, int tamFuente, ColorHex colorTexto){
+        return String.format("    <text fill='%s' font-family='sans-serif' font-size='%d' font-weight='bold' x='%f' y='%f' text-anchor='start'>%s</text>\n",
+                             colorTexto.getCodigoColor(), tamFuente, x, y, texto);
+    }
+
+    /**
+     * Dibuja un texto en el lienzo en la posición especificada [alineado a la derecha].
+     *
+     * @param x la coordenada x del punto de inicio del texto.
+     * @param y la coordenada y del punto de inicio del texto.
+     * @param texto el contenido del texto que se mostrará en el lienzo.
+     * @param tamFuente el tamaño de la fuente del texto.
+     * @param colorTexto el color del texto, especificado mediante una instancia de ColorHex.
+     */
+    @Override public String dibujaTextoDerecha(double x, double y, String texto, int tamFuente, ColorHex colorTexto){
+        return String.format("    <text fill='%s' font-family='sans-serif' font-size='%d' font-weight='bold' x='%f' y='%f' text-anchor='end'>%s</text>\n",
                              colorTexto.getCodigoColor(), tamFuente, x, y, texto);
     }
 

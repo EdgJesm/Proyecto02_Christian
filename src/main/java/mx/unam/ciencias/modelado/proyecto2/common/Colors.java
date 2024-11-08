@@ -132,6 +132,9 @@ public class Colors {
      */
     public static final String BGD_WHITE = "\033[0;47m";
 
+    /**Constructor de la clase. */
+    public Colors(){}
+
     /**
      * Imprime la cadena <code>s</code> con el formato dado. Imprime con retorno de carro.
      *

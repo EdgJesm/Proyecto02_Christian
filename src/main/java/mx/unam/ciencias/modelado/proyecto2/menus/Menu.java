@@ -43,7 +43,7 @@ public class Menu extends Application {
         /**Variable estatica que será un valor momentaneo para la lista de rutas otpimas.. */
     private static List<RutaOptima> inicialRutasOptimas;
 
-    // Constructor vacío para JavaFX
+    /**Constructor de la clase. */
     public Menu() {}
 
     /**
@@ -105,12 +105,12 @@ public class Menu extends Application {
                 Estacion destino = comboEstacionDestino.getValue();
                 RutaOptima rutaOptimaSeleccionada = comboRutasOptimas.getValue();
 
-                if (rutaSeleccionada != null && origen != null && destino != null && rutaOptimaSeleccionada != null) {
-                    List<Estacion> trayectoria = rutaSeleccionada.buscaRuta(origen, destino, rutaOptimaSeleccionada);
-                    String svgFilePath = generaArchivo(rutaSeleccionada, trayectoria); // Obtenemos la ruta del SVG generado
-                    mostrarRuta(svgFilePath); // Mostramos la imagen generada
-                } else {
+                if(rutaSeleccionada == null || origen == null || destino == null || rutaOptimaSeleccionada == null){
                     mostrarError("Por favor, selecciona todos los campos necesarios.");
+                }else{
+                    List<Estacion> trayectoria = rutaSeleccionada.buscaRuta(origen, destino, rutaOptimaSeleccionada);
+                    String archivo = generaArchivo(rutaSeleccionada, trayectoria);
+                    mostrarRuta(archivo);
                 }
             });
 
@@ -195,13 +195,14 @@ public class Menu extends Application {
     private String generaArchivo(Ruta ruta, List<Estacion> trayectoria){
         GraficadorBuilderSVG<Estacion> graficador = new GraficadorBuilderSVG<>(ruta.getGrafica());
         graficador.setTrayectoria(trayectoria);
+        graficador.setDatosColores(ruta.getDatosColoracion());
 
         // Guardamos el archivo SVG temporalmente
-        String svgFilePath = graficador.getNombreArchivo();
+        String svgFilePath = graficador.getNombreArchivo() + ".svg";
         ReaderWriter.writeOverwrite(graficador.graficar(), svgFilePath);
 
         // Convertimos el SVG a PNG
-        String pngFilePath = graficador.getNombreArchivo().replace(".svg",".png");
+        String pngFilePath = graficador.getNombreArchivo() + ".png";
         convertirSVGaPNG(svgFilePath, pngFilePath);
 
         // Devuelve la ruta del archivo PNG generado

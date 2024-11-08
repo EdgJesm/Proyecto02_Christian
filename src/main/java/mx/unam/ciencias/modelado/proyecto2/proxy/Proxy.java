@@ -5,33 +5,57 @@ import mx.unam.ciencias.modelado.proyecto2.strategy.*;
 
 import java.io.Serializable;
 import java.util.List;
+
 /**
- * Clase que se encarga de acceder al objeto real en proxy
+ * Clase {@code Proxy} que implementa el patrón Proxy para acceder al objeto
+ * real del servicio Pumabus. La clase se encarga de delegar las llamadas
+ * a los métodos del servicio real, permitiendo un acceso indirecto.
+ * 
+ * <p>La clase {@code Proxy} implementa la interfaz {@link PumabusService}, lo que
+ * le permite actuar como un representante del servicio real.</p>
+ * 
  */
-public class Proxy implements Serializable, PumabusService{
+public class Proxy implements Serializable, PumabusService {
+
+    /** Servidor asociado al proxy. */
     private PumabusService servidor;
 
     /**
-     * Método constructor de nuestra clase Proxy para proxy
-     * @param servidor el objeto real en proxy
+     * Constructor de la clase {@code Proxy}.
+     * 
+     * Este constructor inicializa el proxy con el servidor real que se va a
+     * delegar las solicitudes. El servidor es el objeto que contiene la lógica
+     * real de obtención de rutas y criterios de optimización.
+     * 
+     * @param servidor El objeto real al que el proxy delegará las solicitudes.
      */
-    public Proxy(PumabusService servidor){
-      this.servidor = servidor;
+    public Proxy(PumabusService servidor) {
+        this.servidor = servidor;
     }
 
     /**
-     * Implementación del método para obtener el sistema completo.
-     * @return la ruta compuesta con la que cuenta el servidor.
+     * Implementación del método {@link PumabusService#getSistemaCompleto()}.
+     * Este método delega la llamada al servidor real para obtener el sistema
+     * completo de rutas.
+     * 
+     * @return Una instancia de {@link RutaCompuesta} que representa el sistema
+     *         completo de rutas gestionadas por el servidor real.
      */
-    @Override public RutaCompuesta getSistemaCompleto(){
+    @Override
+    public RutaCompuesta getSistemaCompleto() {
         return servidor.getSistemaCompleto();
     }
 
     /**
-     * Implementación del método para obtener los criterios de optimización.
-     * @return una List<RutaOptima> con los criterios de optimización disponibles.
+     * Implementación del método {@link PumabusService#getCriteriosOptimizacion()}.
+     * Este método delega la llamada al servidor real para obtener los criterios
+     * de optimización disponibles para el sistema.
+     * 
+     * @return Una lista de objetos {@link RutaOptima} que representan los criterios
+     *         de optimización disponibles en el servidor real.
      */
-    @Override public List<RutaOptima> getCriteriosOptimizacion(){
+    @Override
+    public List<RutaOptima> getCriteriosOptimizacion() {
         return servidor.getCriteriosOptimizacion();
-    }    
+    }
 }

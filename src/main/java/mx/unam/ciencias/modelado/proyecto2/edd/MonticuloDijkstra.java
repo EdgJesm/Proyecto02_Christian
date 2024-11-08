@@ -4,6 +4,9 @@ import java.util.NoSuchElementException;
 
 /**
  * Iterfaz para montículos usables por el algoritmo de Dijkstra.
+ * 
+ * @param <T> el tipo de los elementos almacenados en el montículo, que debe
+ *            ser comparable (implementa {@link Comparable}).
  */
 public interface MonticuloDijkstra<T extends Comparable<T>> {
 

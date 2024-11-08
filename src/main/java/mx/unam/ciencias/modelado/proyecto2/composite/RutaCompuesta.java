@@ -1,12 +1,14 @@
 package mx.unam.ciencias.modelado.proyecto2.composite;
 
-import mx.unam.ciencias.modelado.proyecto2.edd.Grafica;
-import mx.unam.ciencias.modelado.proyecto2.edd.GraficaDirigida;
+import mx.unam.ciencias.modelado.proyecto2.edd.*;
+import mx.unam.ciencias.modelado.proyecto2.graficable.ColorHex;
 import mx.unam.ciencias.modelado.proyecto2.factory.fabricarutas.Estacion;
 import mx.unam.ciencias.modelado.proyecto2.strategy.RutaOptima;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
 
 /**
  * Clase para la ruta compuesta por otras rutas.
@@ -20,7 +22,9 @@ public class RutaCompuesta implements Ruta, Serializable{
     /**Lista de todas las rutas que se agreguen. */
     private List<Ruta> rutas;
     /**Nombre de la ruta compuesta. */
-    private final String NOMBRE = "Pumabus sistema completo.";
+    private final String NOMBRE = "Sistema completo";
+    /**Color de la ruta (incluso si no contamos con un color concreto al ser compuesta) */
+    private final ColorHex COLOR = ColorHex.NEGRO;
 
     /**Constructor de la clase, inicializa la grafica. */
     public RutaCompuesta(){
@@ -53,6 +57,15 @@ public class RutaCompuesta implements Ruta, Serializable{
                 }
             }
         }
+    }
+
+    /**
+     * Método para eliminar una ruta del sistema compuesto.
+     * @param elemento un elemento ruta que será eliminado de las colecciones de esta clase.
+     */
+    public void elimina(Ruta elemento){
+        rutas.remove(elemento);
+        grafica.elimina(elemento.getGrafica());
     }
 
     /**
@@ -98,7 +111,7 @@ public class RutaCompuesta implements Ruta, Serializable{
 
     /**
      * Método que devuelve la lista de estaciones con las que cuenta la ruta compuesta.
-     * @return una List<Estacion>.
+     * @return una {@code List<Estacion>} que representa las estaciones de la ruta..
      */
     @Override public List<Estacion> getEstaciones(){
         return getGrafica().obtenerElementos();
@@ -106,14 +119,53 @@ public class RutaCompuesta implements Ruta, Serializable{
 
     /**
      * Método que devuelve una lista de instancias de Ruta de todo el sistema,
-     * @return una List<Ruta>
+     * @return una {@code List<Ruta>} que representa el conjunto de rutas asociadas a la compuesta.
      */
     public List<Ruta> getRutas(){
         return rutas;
     }
 
+    /**
+     * Método que devuelve un diccionario de cadenas asociadas a un color.
+     * Esto es necesario para dar datos de simbología en el archivo graficable.
+     * @return un {@code Map<String, ColorHex>}
+     */
+    @Override public Map<String, ColorHex> getDatosColoracion(){
+        Map<String, ColorHex> datosColores = new HashMap<>();
+        for(Ruta ruta : rutas){
+            datosColores.put(ruta.getNombre(), ruta.getColoracion());
+        }
+        return datosColores;
+    }
+
+    /**
+     * Método que mantiene
+     */
+    @Override public ColorHex getColoracion(){
+        return this.COLOR;
+    }
+
+    /**
+     * Implementación del método toString. Para completitud y practicidad con javaFX
+     * @return el nombre de la ruta.
+     */
     @Override public String toString(){
         return getNombre();
+    }
+
+    /**
+     * Implementación del método equals, para comparar rutas.
+     * @param obj un objeto cualquiera.
+     * @return si son "iguales" obj y la clase actual.
+     */
+    @Override public boolean equals(Object obj) {
+        if (this == obj) return true; // Compara referencias
+        if (obj == null || getClass() != obj.getClass()) return false; // Compara tipos
+
+        Ruta that = (Ruta) obj;
+
+        // Compara un atributo.
+        return this.getNombre().equals(that.getNombre());
     }
 
 }
