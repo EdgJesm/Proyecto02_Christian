@@ -88,6 +88,10 @@ public class Menu extends Application {
 
             ComboBox<RutaOptima> comboRutasOptimas = new ComboBox<>();
             comboRutasOptimas.getItems().addAll(rutasOptimas);
+            // los deshabilitamos de inicio
+            comboEstacionOrigen.setDisable(true);
+            comboEstacionDestino.setDisable(true);
+            comboRutasOptimas.setDisable(true);
 
             comboRutas.setOnAction(e -> {
                 Ruta rutaSeleccionada = comboRutas.getValue();
@@ -95,7 +99,18 @@ public class Menu extends Application {
                     List<Estacion> estaciones = rutaSeleccionada.getEstaciones();
                     comboEstacionOrigen.getItems().setAll(estaciones);
                     comboEstacionDestino.getItems().setAll(estaciones);
+                    comboEstacionOrigen.setDisable(false) ;
+                    comboEstacionDestino.setDisable(true);
+                    comboRutasOptimas.setDisable(true);
                 }
+            });
+            comboEstacionOrigen.setOnAction(e -> {
+              if(comboEstacionOrigen.getValue() != null)
+                  comboEstacionDestino.setDisable(false);
+            });
+            comboEstacionDestino.setOnAction(e -> {
+              if(comboEstacionDestino.getValue() != null)
+                  comboRutasOptimas.setDisable(false);
             });
 
             Button button = new Button("Buscar Ruta");
@@ -136,7 +151,7 @@ public class Menu extends Application {
 
             imageView.setOnScroll(event -> {
                 double delta = event.getDeltaY(); // Detecta el movimiento de la rueda del mouse o el gesto del mousepad.
-                
+
                 // Si el gesto es hacia arriba (hacia afuera), hacemos zoom in, si es hacia abajo (hacia adentro), zoom out
                 if (delta > 0) {
                     imageView.setFitWidth(imageView.getFitWidth() * 1.1); // Aumentar tamaño
