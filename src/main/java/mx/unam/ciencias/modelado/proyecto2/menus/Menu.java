@@ -82,11 +82,16 @@ public class Menu extends Application {
             // Crear ComboBoxes
             ComboBox<Ruta> comboRutas = new ComboBox<>();
             comboRutas.getItems().addAll(rutaCompuesta.getRutas());
+            comboRutas.setPromptText("Seleccione ruta.");
 
             ComboBox<Estacion> comboEstacionOrigen = new ComboBox<>();
+            comboEstacionOrigen.setPromptText("Seleccione origen.");
             ComboBox<Estacion> comboEstacionDestino = new ComboBox<>();
+            comboEstacionDestino.setPromptText("Seleccione destino.");
 
             ComboBox<RutaOptima> comboRutasOptimas = new ComboBox<>();
+            comboRutasOptimas.setPromptText("Seleccione tipo de trayectoria.");
+
             comboRutasOptimas.getItems().addAll(rutasOptimas);
             // los deshabilitamos de inicio
             comboEstacionOrigen.setDisable(true);
@@ -132,7 +137,7 @@ public class Menu extends Application {
             VBox vbox = new VBox(10, comboRutas, comboEstacionOrigen, comboEstacionDestino, comboRutasOptimas, button);
             Scene scene = new Scene(vbox, 400, 300);
             primaryStage.setScene(scene);
-            primaryStage.setTitle("Seleccionar Ruta en RutaCompuesta");
+            primaryStage.setTitle("Sistema de rutas para el Pumabus.");
             primaryStage.show();
         });
     }
