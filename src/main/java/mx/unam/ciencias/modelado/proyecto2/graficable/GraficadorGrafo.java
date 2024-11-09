@@ -127,7 +127,7 @@ public class GraficadorGrafo<T extends VerticeCoordenado> {
      */
     public void graficaCamino(List<T> camino){
 
-        ColorHex colorCamino = ColorHex.NEGRO; // Puedes cambiar el color del camino
+        ColorHex colorCamino = ColorHex.NEGRO;
 
         for (int i = 0; i < camino.size() - 1; i++) {
             T verticeActual = camino.get(i);
