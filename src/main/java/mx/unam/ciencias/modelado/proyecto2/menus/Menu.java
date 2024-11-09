@@ -25,8 +25,8 @@ import mx.unam.ciencias.modelado.proyecto2.graficable.*;
 import mx.unam.ciencias.modelado.proyecto2.strategy.RutaOptima;
 import mx.unam.ciencias.modelado.proyecto2.common.ReaderWriter;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.List;
+import java.util.Comparator;
 
 /**
  * Clase menu que contempla toda la logica en la que el usuario puede generar su ruta.
