@@ -26,7 +26,7 @@ import mx.unam.ciencias.modelado.proyecto2.strategy.RutaOptima;
 import mx.unam.ciencias.modelado.proyecto2.common.ReaderWriter;
 
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Comparator;
 
 /**
  * Clase menu que contempla toda la logica en la que el usuario puede generar su ruta.
@@ -102,6 +102,7 @@ public class Menu extends Application {
                 Ruta rutaSeleccionada = comboRutas.getValue();
                 if (rutaSeleccionada != null) {
                     List<Estacion> estaciones = rutaSeleccionada.getEstaciones();
+                    estaciones.sort(Comparator.comparing(Object::toString));//Los ordena.
                     comboEstacionOrigen.getItems().setAll(estaciones);
                     comboEstacionDestino.getItems().setAll(estaciones);
                     comboEstacionOrigen.setDisable(false) ;

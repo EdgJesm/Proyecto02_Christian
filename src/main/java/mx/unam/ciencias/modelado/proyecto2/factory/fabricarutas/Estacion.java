@@ -120,6 +120,11 @@ public class Estacion implements VerticeCoordenado, Serializable {
         return Objects.hash(coordX, coordY, descripcion);
     }
 
+    /**
+     * Implementación del método toString, importante para practicidad de javaFX.
+     * 
+     * @return la cadena devuelta por el método getDescripcion()
+     */
     @Override public String toString(){
         return getDescripcion();
     }
