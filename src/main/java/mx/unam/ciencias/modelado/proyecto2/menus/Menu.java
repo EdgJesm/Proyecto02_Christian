@@ -25,7 +25,7 @@ import mx.unam.ciencias.modelado.proyecto2.graficable.*;
 import mx.unam.ciencias.modelado.proyecto2.strategy.RutaOptima;
 import mx.unam.ciencias.modelado.proyecto2.common.ReaderWriter;
 
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -102,6 +102,7 @@ public class Menu extends Application {
                 Ruta rutaSeleccionada = comboRutas.getValue();
                 if (rutaSeleccionada != null) {
                     List<Estacion> estaciones = rutaSeleccionada.getEstaciones();
+                    estaciones.sort(Comparator.comparing(Object::toString));//Los ordena.
                     comboEstacionOrigen.getItems().setAll(estaciones);
                     comboEstacionDestino.getItems().setAll(estaciones);
                     comboEstacionOrigen.setDisable(false) ;

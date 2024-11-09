@@ -24,7 +24,7 @@ public class RutaCompuesta implements Ruta, Serializable{
     /**Nombre de la ruta compuesta. */
     private final String NOMBRE = "Sistema completo";
     /**Color de la ruta (incluso si no contamos con un color concreto al ser compuesta) */
-    private final ColorHex COLOR = ColorHex.NEGRO;
+    private final ColorHex COLOR = ColorHex.GRIS;
 
     /**Constructor de la clase, inicializa la grafica. */
     public RutaCompuesta(){

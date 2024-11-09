@@ -127,7 +127,7 @@ public class GraficadorGrafo<T extends VerticeCoordenado> {
      */
     public void graficaCamino(List<T> camino){
 
-        ColorHex colorCamino = ColorHex.ROJO; // Puedes cambiar el color del camino
+        ColorHex colorCamino = ColorHex.NEGRO; // Puedes cambiar el color del camino
 
         for (int i = 0; i < camino.size() - 1; i++) {
             T verticeActual = camino.get(i);
@@ -137,7 +137,8 @@ public class GraficadorGrafo<T extends VerticeCoordenado> {
             double x2 = ESCALA * siguienteVertice.getCoordX();
             double y2 = ESCALA * siguienteVertice.getCoordY();
 
-            sb.append(traductor.dibujaLinea(x1, y1, x2, y2, colorCamino, ANCHO_LINEA*2));
+            sb.append(traductor.dibujaLinea(x1, y1, x2, y2, colorCamino, ANCHO_LINEA*2+4));
+            sb.append(traductor.dibujaLinea(x1, y1, x2, y2, siguienteVertice.getColorVertice(), ANCHO_LINEA*2));
         }
 
     }
