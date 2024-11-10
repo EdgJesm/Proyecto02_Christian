@@ -12,9 +12,6 @@ import java.util.Map;
  * @param <T> Tipo de los vértices del grafo, que debe implementar la interfaz VerticeCoordenado.
  */
 public class GraficadorBuilderSVG<T extends VerticeCoordenado> {
-
-    /** Grafo dirigido. */
-    private GraficaDirigida<T> grafo;
     /** Trayectoria a resaltar en el grafo. */
     private List<T> trayectoria;
     /** Diccionario de cadenas asociadas a colores. */
@@ -30,7 +27,6 @@ public class GraficadorBuilderSVG<T extends VerticeCoordenado> {
      * @param grafo Grafo dirigido de vértices que implementan VerticeCoordenado.
      */
     public GraficadorBuilderSVG(GraficaDirigida<T> grafo) {
-        this.grafo = grafo;
         this.graficador = new GraficadorGrafo<>(grafo, new TraductorSVG());
     }
 
@@ -66,10 +62,7 @@ public class GraficadorBuilderSVG<T extends VerticeCoordenado> {
      * @return La cadena SVG que representa el grafo con la trayectoria, si se configuró.
      */
     public String graficar() {
-        if (grafo == null || grafo.obtenerElementos().isEmpty()) {
-            throw new IllegalArgumentException("El grafo no contiene elementos.");
-        }
-
+        
         // Graficar las aristas del grafo
         graficador.graficaAristas();
 
