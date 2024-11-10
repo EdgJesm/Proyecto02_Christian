@@ -8,39 +8,76 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Clase que maneja el flujo del programa como Cliente-Servidor.
  */
 public class ClienteRemoto {
 
-    /**Puerto para la conexión */
+    /** Puerto para la conexión */
     private static final int PORT = 12345;
-    /**Host del server. */
+    /** Host del servidor. */
     private static final String HOST = "localhost";
+    /** Contador de conexiones activas atomicInteger es p<ara un uso concurrente de estas cuentas. */
+    private static final AtomicInteger conexionesActivas = new AtomicInteger(0);
 
-    /**Constructor de la clase. */
-    public ClienteRemoto(){}
+    /** Constructor de la clase. */
+    public ClienteRemoto() {}
 
     /**
      * Método que inicia el servidor, configurando el sistema de rutas y criterios de optimización.
+     * El servidor se mantendrá escuchando y aceptando conexiones mientras haya clientes.
      */
     public static void iniciarServidor() {
         try (ServerSocket serverSocket = new ServerSocket(PORT)) {
             System.out.println("Servidor iniciado en el puerto " + PORT);
-            Socket clientSocket = serverSocket.accept(); // Acepta conexiones de cliente
-            System.out.println("Cliente conectado.");
 
+            // Bucle para aceptar conexiones de clientes mientras el servidor tenga clientes conectados
+            while (true) {
+                Socket clientSocket = serverSocket.accept(); // Acepta conexión de cliente
+                System.out.println("Cliente conectado.");
+
+                // Incrementa el contador de conexiones activas
+                conexionesActivas.incrementAndGet();
+
+                // Maneja el cliente en un hilo.
+                new Thread(() -> manejarCliente(clientSocket)).start();
+            }
+        } catch (IOException e) {
+            System.err.println("Conexión interrumpida.");
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Método que maneja la comunicación con un cliente específico.
+     * @param clientSocket El socket de la conexión con el cliente.
+     */
+    private static void manejarCliente(Socket clientSocket) {
+        try {
             RemoteMessagePassing<Serializable> remote = new RemoteMessagePassing<>(clientSocket);
-            PumabusService servidor = Servidor.getInstancia(); // Instancia del servidor
-            Proxy proxy = new Proxy(servidor); // Crear el proxy del servidor
+            // Instancia del servidor y creación del proxy
+            PumabusService servidor = Servidor.getInstancia();
+            Proxy proxy = new Proxy(servidor);
 
             // Enviar el sistema completo y los criterios de optimización al cliente
             remote.send(proxy.getSistemaCompleto());
             remote.send((Serializable) proxy.getCriteriosOptimizacion());
 
-            remote.close(); // Cierra la conexión
+            // Recibe mensaje del cliente (por ejemplo, para indicar si el cliente se desconectó)
+            System.out.println(remote.receive());
+
+            // Cuando se recibe el mensaje, decrementamos las conexiones activas
+            if (conexionesActivas.decrementAndGet() == 0) {
+                System.out.println("No hay más clientes conectados. Cerrando el servidor.");
+                System.exit(0);  // Cierra el servidor cuando no haya más clientes conectados
+            }
+
+            // Cierra la conexión con el cliente
+            remote.close();
         } catch (IOException e) {
+            System.err.println("Conexión interrumpida.");
             e.printStackTrace();
         }
     }
@@ -60,7 +97,6 @@ public class ClienteRemoto {
             // Recibe el objeto que contiene los criterios de optimización
             Object receivedObject = remote.receive();  // Recibe el objeto como Object
             
-            
             // Verificar si el objeto recibido es una lista
             if (receivedObject instanceof List<?>) {
                 List<?> list = (List<?>) receivedObject;
@@ -78,18 +114,21 @@ public class ClienteRemoto {
                 System.out.println("El objeto recibido no es una lista.");
             }
 
+            // Enviar mensaje para notificar al servidor que el cliente se desconectó
+            remote.send("Cliente desconectado.");
+
             remote.close(); // Cierra la conexión
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-
     /**
      * Método principal para ejecutar el programa en modo cliente o servidor.
      * @param args si es "servidor", ejecuta en modo servidor; si es "cliente", ejecuta en modo cliente.
      */
     public static void main(String[] args) {
+        // Inicia el servidor
         iniciarServidor();
     }
 }
