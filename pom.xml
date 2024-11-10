@@ -79,16 +79,6 @@
         <version>0.0.8</version>
         <configuration>
           <mainClass>mx.unam.ciencias.modelado.proyecto2.Main</mainClass>
-          <systemProperties>
-            <systemProperty>
-                <key>jdk.gtk.verbose</key>
-                <value>true</value>
-            </systemProperty>
-            <systemProperty>
-                <key>jdk.gtk.version</key>
-                <value>3</value>
-            </systemProperty>
-          </systemProperties>
         </configuration>
       </plugin>
 
