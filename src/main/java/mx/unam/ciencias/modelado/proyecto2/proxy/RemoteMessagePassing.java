@@ -83,6 +83,8 @@ public class RemoteMessagePassing<T extends Serializable> {
             }
         } catch (ClassNotFoundException e){
             e.printStackTrace();
+        }catch (EOFException e) {
+            System.out.println("Conexion interrumpida.");
         } catch (IOException e){
             e.printStackTrace();
         }
