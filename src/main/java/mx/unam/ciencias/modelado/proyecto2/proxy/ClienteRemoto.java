@@ -4,6 +4,7 @@ import mx.unam.ciencias.modelado.proyecto2.composite.RutaCompuesta;
 import mx.unam.ciencias.modelado.proyecto2.strategy.RutaOptima;
 import mx.unam.ciencias.modelado.proyecto2.menus.Menu;
 import java.io.Serializable;
+import java.io.EOFException;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -44,9 +45,11 @@ public class ClienteRemoto {
                 // Maneja el cliente en un hilo.
                 new Thread(() -> manejarCliente(clientSocket)).start();
             }
+        } catch (EOFException e) {
+            System.out.println("Un cliente cerró la conexión inesperadamente.");
         } catch (IOException e) {
-            System.err.println("Conexión interrumpida.");
-            e.printStackTrace();
+            System.err.println("Error inesperado: " + e.getMessage());
+            //e.printStackTrace();
         }
     }
 
@@ -76,9 +79,11 @@ public class ClienteRemoto {
 
             // Cierra la conexión con el cliente
             remote.close();
+        }catch (EOFException e) {
+            System.out.println("Un cliente cerró la conexión inesperadamente.");
         } catch (IOException e) {
-            System.err.println("Conexión interrumpida.");
-            e.printStackTrace();
+            System.err.println("Error inesperado: " + e.getMessage());
+            //e.printStackTrace();
         }
     }
 
@@ -86,7 +91,8 @@ public class ClienteRemoto {
      * Método que inicia el cliente, conectándose al servidor para recibir los datos necesarios.
      */
     public static void iniciarCliente() {
-        try (Socket socket = new Socket(HOST, PORT)) {
+        try{
+            Socket socket = new Socket(HOST, PORT);
             System.out.println("Conectado al servidor en " + HOST + ":" + PORT);
 
             RemoteMessagePassing<Serializable> remote = new RemoteMessagePassing<>(socket);
@@ -118,8 +124,11 @@ public class ClienteRemoto {
             remote.send("Cliente desconectado.");
 
             remote.close(); // Cierra la conexión
+        } catch (EOFException e) {
+            System.out.println("Un cliente cerró la conexión inesperadamente.");
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Error inesperado: " + e.getMessage());
+            //e.printStackTrace();
         }
     }
 
