@@ -31,7 +31,8 @@ public class ClienteRemoto {
      * El servidor se mantendrá escuchando y aceptando conexiones mientras haya clientes.
      */
     public static void iniciarServidor() {
-        try (ServerSocket serverSocket = new ServerSocket(PORT)) {
+        try{
+            ServerSocket serverSocket = new ServerSocket(PORT);
             System.out.println("Servidor iniciado en el puerto " + PORT);
 
             // Bucle para aceptar conexiones de clientes mientras el servidor tenga clientes conectados
