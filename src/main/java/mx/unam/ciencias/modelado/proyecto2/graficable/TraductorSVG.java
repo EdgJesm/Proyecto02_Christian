@@ -1,5 +1,7 @@
 package mx.unam.ciencias.modelado.proyecto2.graficable;
 
+import java.util.Locale;
+
 /**
  * Clase Traductor SVG.
  * Se encarga de almacenar todas las posibles figuras que podamos utilizar a lo largo
@@ -21,7 +23,7 @@ public class TraductorSVG implements TraductorLenguaje {
      * @return una cadena que inicia el archivo SVG.
      */
     @Override public String start(double ancho, double alto) {
-        return String.format("<?xml version='1.0' encoding='UTF-8' ?>\n<svg xmlns='http://www.w3.org/2000/svg' width='%.2fpx' height='%.2fpx'>\n <g>\n", ancho, alto);
+        return String.format(Locale.US, "<?xml version='1.0' encoding='UTF-8' ?>\n<svg xmlns='http://www.w3.org/2000/svg' width='%.2fpx' height='%.2fpx'>\n <g>\n", ancho, alto);
     }
 
 
@@ -44,7 +46,7 @@ public class TraductorSVG implements TraductorLenguaje {
      * @return una cadena SVG que representa el círculo.
      */
     @Override public String dibujaCirculo(double cx, double cy, int radio, ColorHex colorBorde, int gruesoBorde, ColorHex colorFigura) {
-        return String.format("    <circle cx='%.2f' cy='%.2f' r='%d' stroke='%s' stroke-width='%d' fill='%s' />\n", 
+        return String.format(Locale.US, "    <circle cx='%.2f' cy='%.2f' r='%d' stroke='%s' stroke-width='%d' fill='%s' />\n", 
                               cx, cy, radio, colorBorde.getCodigoColor(), gruesoBorde, colorFigura.getCodigoColor());
     }
 
@@ -59,7 +61,7 @@ public class TraductorSVG implements TraductorLenguaje {
      * @return una cadena SVG que representa la línea.
      */
     @Override public String dibujaLinea(double x1, double y1, double x2, double y2, ColorHex colorPoste, int anchoPoste) {
-        return String.format("    <line x1='%.2f' y1='%.2f' x2='%.2f' y2='%.2f' stroke='%s' stroke-width='%d' />\n", 
+        return String.format(Locale.US, "    <line x1='%.2f' y1='%.2f' x2='%.2f' y2='%.2f' stroke='%s' stroke-width='%d' />\n", 
                               x1, y1, x2, y2, colorPoste.getCodigoColor(), anchoPoste);
     }
 
@@ -73,7 +75,7 @@ public class TraductorSVG implements TraductorLenguaje {
      * @return una cadena SVG que representa el texto.
      */
     @Override public String dibujaTexto(double x, double y, String texto, int tamFuente, ColorHex colorTexto) {
-        return String.format("    <text fill='%s' font-family='sans-serif' font-size='%d' font-weight='bold' x='%.2f' y='%.2f' text-anchor='middle'>%s</text>\n",
+        return String.format(Locale.US, "    <text fill='%s' font-family='sans-serif' font-size='%d' font-weight='bold' x='%.2f' y='%.2f' text-anchor='middle'>%s</text>\n",
                              colorTexto.getCodigoColor(), tamFuente, x, y, texto);
     }
 
@@ -87,7 +89,7 @@ public class TraductorSVG implements TraductorLenguaje {
      * @param colorTexto el color del texto, especificado mediante una instancia de ColorHex.
      */
     @Override public String dibujaTextoIzquierda(double x, double y, String texto, int tamFuente, ColorHex colorTexto){
-        return String.format("    <text fill='%s' font-family='sans-serif' font-size='%d' font-weight='bold' x='%.2f' y='%.2f' text-anchor='start'>%s</text>\n",
+        return String.format(Locale.US, "    <text fill='%s' font-family='sans-serif' font-size='%d' font-weight='bold' x='%.2f' y='%.2f' text-anchor='start'>%s</text>\n",
                              colorTexto.getCodigoColor(), tamFuente, x, y, texto);
     }
 
@@ -101,7 +103,7 @@ public class TraductorSVG implements TraductorLenguaje {
      * @param colorTexto el color del texto, especificado mediante una instancia de ColorHex.
      */
     @Override public String dibujaTextoDerecha(double x, double y, String texto, int tamFuente, ColorHex colorTexto){
-        return String.format("    <text fill='%s' font-family='sans-serif' font-size='%d' font-weight='bold' x='%.2f' y='%.2f' text-anchor='end'>%s</text>\n",
+        return String.format(Locale.US, "    <text fill='%s' font-family='sans-serif' font-size='%d' font-weight='bold' x='%.2f' y='%.2f' text-anchor='end'>%s</text>\n",
                              colorTexto.getCodigoColor(), tamFuente, x, y, texto);
     }
 
@@ -111,6 +113,6 @@ public class TraductorSVG implements TraductorLenguaje {
      * @return una cadena SVG que representa el rectángulo de fondo.
      */
     @Override public String coloreaLienzo(ColorHex color) {
-        return String.format("    <rect width='100%%' height='100%%' fill='%s' />\n", color.getCodigoColor());
+        return String.format(Locale.US, "    <rect width='100%%' height='100%%' fill='%s' />\n", color.getCodigoColor());
     }
 }
