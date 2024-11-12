@@ -153,7 +153,18 @@ public class Menu extends Application {
             Image image = new Image(imageStream);
             ImageView imageView = new ImageView(image);
             imageView.setPreserveRatio(true);
-            imageView.setFitWidth(600); // Ajustar según sea necesario
+            
+            // Verifica si la imagen tiene dimensiones válidas
+            double imgWidth = image.getWidth();
+            double imgHeight = image.getHeight();
+
+            // Ajusta las dimensiones iniciales de la ventana al tamaño de la imagen (hasta un límite)
+            double initialWidth = Math.min(imgWidth, 800);  // Limitar el tamaño inicial si es demasiado grande
+            double initialHeight = Math.min(imgHeight, 600);
+
+            // Configura la imagen para permitir el zoom y el desplazamiento, si es necesario
+            imageView.setFitWidth(initialWidth); // Inicialmente ajusta al ancho de la imagen o un límite
+            imageView.setFitHeight(initialHeight);
 
             imageView.setOnScroll(event -> {
                 double delta = event.getDeltaY(); // Detecta el movimiento de la rueda del mouse o el gesto del mousepad.
@@ -191,13 +202,14 @@ public class Menu extends Application {
             scrollPane.setContent(imageView);
             scrollPane.setFitToWidth(true); // Ajustar a la pantalla
             scrollPane.setFitToHeight(true);
+            scrollPane.setPrefSize(800, 600); // Ajustar tamaño inicial del ScrollPane
             scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
             scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
 
             // Crear una nueva ventana para mostrar la imagen
             Stage stage = new Stage();
             VBox vbox = new VBox(imageView);
-            Scene scene = new Scene(vbox);
+            Scene scene = new Scene(vbox, initialWidth + 20, initialHeight + 20);
             stage.setScene(scene);
             stage.setTitle("Ruta Calculada");
             stage.show();
