@@ -52,7 +52,7 @@ public class RutaCompuesta implements Ruta, Serializable{
 
             for(Estacion estacion: graficaElemento.obtenerElementos()){
                 if(subGrafica.contiene(estacion) && !grafica.sonVecinos(graficaElemento, subGrafica)){
-                    grafica.conecta(subGrafica, graficaElemento);
+                    grafica.conecta(subGrafica, graficaElemento, graficaElemento.getElementos());
                     break;
                 }
             }
@@ -75,7 +75,29 @@ public class RutaCompuesta implements Ruta, Serializable{
      * @return una lista que supone una trayectoria.
      */
     @Override public List<Estacion> buscaRuta(Estacion origen, Estacion destino, RutaOptima rutaOptima){
-        return rutaOptima.calculaRuta(getGrafica(), origen, destino);
+        GraficaDirigida<Estacion> grafoOrigen = null;
+        GraficaDirigida<Estacion> grafoDestino = null;
+
+        for(GraficaDirigida<Estacion> subGrafica: grafica.obtenerElementos()){
+            if(subGrafica.contiene(origen)){
+                grafoOrigen = subGrafica;
+            }
+
+            if((subGrafica.contiene(destino))){
+                grafoDestino = subGrafica;
+            }
+
+            if((grafoOrigen!=null) && (grafoDestino!=null)){
+                break;
+            }
+        }
+
+        List<GraficaDirigida<Estacion>> rutasLOL = grafica.dijkstraElementos(grafoOrigen, grafoDestino);
+
+        GraficaDirigida<Estacion> grafoLOL = new GraficaDirigida<>();
+        grafoLOL = grafoLOL.combinarGraficas(rutasLOL);
+
+        return rutaOptima.calculaRuta(grafoLOL, origen, destino);
     }
 
     /**
