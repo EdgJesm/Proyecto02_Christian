@@ -100,7 +100,7 @@ Para ejecutarlo (en cualquier sistema que cuente con Maven y Java) se deben usar
     ```bash
     mvn javafx:run
 
-## 🚀 Notas adicionales.
+## Notas adicionales.
 
 *   **Nota 1.** Una vez el servidor detecta que ya no hay usuarios usando el sistema se muestra el siguiente mensaje en la terminal 1:
     ```text
