@@ -13,7 +13,7 @@ Rosa Victoria Villa Padilla [2025-1] (12/11/2024)
 
 ---
 
-## 📝 Problemática
+## Problemática
 
 El Pumabús es el servicio de transporte más utilizado por estudiantes, profesores y trabajadores de Ciudad Universitaria para moverse dentro del campus. Sin embargo, a pesar de su rol clave en la movilidad, la complejidad de sus rutas, la afluencia de estas y el desconocimiento del funcionamiento del sistema ha resultado un problema para múltiples usuarios, complicando el uso del servicio.
 
@@ -21,7 +21,7 @@ Actualmente, los usuarios carecen de herramientas para conocer una ruta óptima 
 
 ---
 
-## 🏗️ Elección de patrones de diseño
+## Elección de patrones de diseño
 
 ### MVC (Modelo-Vista-Controlador)
 
@@ -64,13 +64,13 @@ Se utiliza el patrón de diseño Strategy (paquete `strategy/`) para poder dar l
 
 ---
 
-## 📐 Respecto al diagrama de clases
+## Respecto al diagrama de clases
 
 Es importante mencionar que el paquete `edd/` de nuestro proyecto comprende implementaciones propias de estructuras de datos para las cuales Java no proporciona una implementación de estas (las gráficas). Estas estructuras de datos emplean clases anidadas para su funcionamiento, por ello que se hace uso del operador de anidamiento para denotar esta parte.
 
 ---
 
-## 💻 Respecto a la compilación del proyecto
+## Respecto a la compilación del proyecto
 
 El proyecto hace uso de un `pom.xml` para su instalación. Esto fue comentado en clase con la profesora y se nos dio permiso debido a dos aspectos particulares de nuestro proyecto:
 
@@ -79,13 +79,13 @@ El proyecto hace uso de un `pom.xml` para su instalación. Esto fue comentado en
 
 ---
 
-## 🚀 Respecto al uso del proyecto
+## Respecto al uso del proyecto
 
 El proyecto fue desarrollado en las versiones de Java 11.0.22 y Java 21.0.5 y se empleó Linux (Debian y Ubuntu) durante su desarrollo.
 
 Para ejecutarlo (en cualquier sistema que cuente con Maven y Java) se deben usar los siguientes comandos en terminal:
 
-**⚠️ Importante:** Para usar el programa es necesario que se utilicen al menos dos terminales, una para encender el servidor del sistema y otra para hacer uso del programa como usuario. Es necesario que el servidor esté encendido para que se pueda usar el programa.
+**Importante:** Para usar el programa es necesario que se utilicen al menos dos terminales, una para encender el servidor del sistema y otra para hacer uso del programa como usuario. Es necesario que el servidor esté encendido para que se pueda usar el programa.
 
 1.  **Compilar todas las clases y generar los archivos `.class`:**
     ```bash
